@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asmani Cosmetics - Luxury Beauty Products</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS - Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Radio Broadcast Schedule (scoped styles) -->
+    <style>
+        #radio-broadcast-schedule {
+            padding: 70px 0;
+        }
+
+        #radio-broadcast-schedule .rbs-surface {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.18);
+            border-radius: 24px;
+            padding: 28px;
+        }
+
+        #radio-broadcast-schedule .rbs-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        #radio-broadcast-schedule .rbs-header .section-title {
+            margin-bottom: 8px;
+        }
+
+        #radio-broadcast-schedule .rbs-subtitle {
+            color: #555;
+            margin: 0 auto 14px;
+            max-width: 860px;
+        }
+
+        #radio-broadcast-schedule .rbs-timings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+        }
+
+        #radio-broadcast-schedule .rbs-timings li {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 14px;
+            padding: 10px 12px;
+            color: #333;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #radio-broadcast-schedule .rbs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        #radio-broadcast-schedule .rbs-player {
+            background: white;
+            border-radius: 18px;
+            border: 1px solid rgba(0,0,0,0.06);
+            padding: 18px;
+        }
+
+        #radio-broadcast-schedule .rbs-player-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        #radio-broadcast-schedule .rbs-now {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #radio-broadcast-schedule .rbs-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 999px;
+            background: #f5f7ff;
+            border: 1px solid rgba(102, 126, 234, 0.25);
+            color: #333;
+            width: fit-content;
+        }
+
+        #radio-broadcast-schedule .rbs-chip strong {
+            color: #111;
+        }
+
+        #radio-broadcast-schedule .rbs-picker {
+            min-width: 260px;
+            flex: 1;
+        }
+
+        #radio-broadcast-schedule .rbs-picker label {
+            display: block;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        #radio-broadcast-schedule .rbs-picker select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            outline: none;
+            background: white;
+        }
+
+        #radio-broadcast-schedule .rbs-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 14px;
+            border-radius: 14px;
+            background: #fafafa;
+            border: 1px solid rgba(0,0,0,0.06);
+            margin-bottom: 12px;
+        }
+
+        #radio-broadcast-schedule .rbs-controls .grp {
+            display: inline-flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        #radio-broadcast-schedule .rbs-btn {
+            background: white;
+            border: 1px solid #ddd;
+            color: #333;
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+
+        #radio-broadcast-schedule .rbs-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.10);
+            border-color: #cfcfcf;
+        }
+
+        #radio-broadcast-schedule .rbs-btn.primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        #radio-broadcast-schedule .rbs-btn.danger {
+            border-color: #ffd6d6;
+            background: #fff5f5;
+            color: #b00020;
+        }
+
+        #radio-broadcast-schedule .rbs-btn[disabled],
+        #radio-broadcast-schedule input[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        #radio-broadcast-schedule .rbs-volume {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #555;
+        }
+
+        #radio-broadcast-schedule .rbs-volume input[type="range"] {
+            width: 160px;
+        }
+
+        #radio-broadcast-schedule .rbs-player-area {
+            background: #f5f5f5;
+            border-radius: 14px;
+            padding: 16px;
+            min-height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #radio-broadcast-schedule .rbs-player-area iframe {
+            width: 100%;
+            height: 380px;
+            border: none;
+            border-radius: 12px;
+        }
+
+        #radio-broadcast-schedule .rbs-placeholder {
+            text-align: center;
+            color: #777;
+        }
+
+        #radio-broadcast-schedule .rbs-tap {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 34px;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.18);
+        }
+
+        #radio-broadcast-schedule .rbs-slot {
+            background: white;
+            border-radius: 18px;
+            border: 1px solid rgba(0,0,0,0.06);
+            padding: 18px;
+        }
+
+        #radio-broadcast-schedule .rbs-slot.active {
+            border: 2px solid rgba(76, 175, 80, 0.65);
+            box-shadow: 0 12px 30px rgba(76, 175, 80, 0.18);
+        }
+
+        #radio-broadcast-schedule .rbs-slot-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        #radio-broadcast-schedule .rbs-slot-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        #radio-broadcast-schedule .rbs-live {
+            background: #e53935;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(0,0,0,0.12);
+            box-shadow: 0 10px 18px rgba(229, 57, 53, 0.20);
+            animation: rbsBlink 1s infinite;
+        }
+
+        #radio-broadcast-schedule .rbs-live::before {
+            content: "●";
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        @keyframes rbsBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.45; }
+        }
+
+        #radio-broadcast-schedule .rbs-broadcast-btn {
+            appearance: none;
+            border: none;
+            background: #e53935;
+            color: white;
+            font-weight: 800;
+            padding: 10px 14px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            animation: rbsBlink 1s infinite;
+        }
+
+        #radio-broadcast-schedule .rbs-broadcast-btn[hidden] {
+            display: none;
+        }
+
+        #radio-broadcast-schedule .rbs-broadcast-btn::before {
+            content: "●";
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        #radio-broadcast-schedule .rbs-stations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        #radio-broadcast-schedule .rbs-station {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 14px;
+            padding: 14px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            text-align: center;
+        }
+
+        #radio-broadcast-schedule .rbs-station:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+        }
+
+        #radio-broadcast-schedule .rbs-station.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: rgba(76, 175, 80, 0.85);
+        }
+
+        #radio-broadcast-schedule .rbs-station .freq {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-top: 6px;
+        }
+
+        #radio-broadcast-schedule .rbs-station .nm {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        #radio-broadcast-schedule .rbs-unavailable {
+            text-align: center;
+            padding: 22px;
+            color: #666;
+        }
+
+        #radio-broadcast-schedule .rbs-links {
+            display: inline-flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 14px;
+        }
+
+        #radio-broadcast-schedule .rbs-link {
+            text-decoration: none;
+            color: white;
+            background: #4267B2;
+            border-radius: 999px;
+            padding: 10px 16px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #radio-broadcast-schedule .rbs-link.youtube {
+            background: #FF0000;
+        }
+
+        @media (min-width: 992px) {
+            #radio-broadcast-schedule .rbs-grid {
+                grid-template-columns: 1.05fr 0.95fr;
+                align-items: start;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #radio-broadcast-schedule .rbs-volume input[type="range"] {
+                width: 140px;
+            }
+
+            #radio-broadcast-schedule .rbs-player-area iframe {
+                height: 320px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #radio-broadcast-schedule .rbs-surface {
+                padding: 18px;
+            }
+
+            #radio-broadcast-schedule .rbs-stations {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-a">A</div>
+                    <h1>Asmani Cosmetics</h1>
+                </div>
+            </a>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="shop.html">Products</a></li>
+                    <li><a href="index.html#categories">Categories</a></li>
+                    <li><a href="index.html#radio-broadcast-schedule">Radio Schedule</a></li>
+                    <li><a href="index.html#footer">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <form class="nav-search" role="search" aria-label="Search products">
+                    <input id="navProductSearch" class="nav-search-input" type="search" placeholder="Search products..." aria-label="Search products" autocomplete="off">
+                    <button class="nav-search-btn" type="submit" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Asmani Cosmetics</h1>
+            <p class="hero-tagline">Embrace Your Natural Beauty</p>
+            <p class="hero-subtitle">Premium cosmetics crafted for elegance and confidence</p>
+            <button class="cta-button" onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })">Shop Now</button>
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <!-- Sliding Cards Section -->
+    <section class="sliding-section" data-aos="fade-up">
+        <div class="sliding-container">
+            <div class="sliding-cards" id="slidingCards">
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="herbal oil.jpeg" alt="Asmani Herbal Oil 100ml">
+                    <h3>Asmani Herbal Oil 100ml</h3>
+                    <p class="slide-price">PKR 500</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Herbal Oil 100ml', 'PKR 500')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="herbal oil.jpeg" alt="Asmani Herbal Oil 200ml">
+                    <h3>Asmani Herbal Oil 200ml</h3>
+                    <p class="slide-price">PKR 700</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Herbal Oil 200ml', 'PKR 700')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="formula beauty cream.jpeg" alt="Asmani Formula Beauty Cream">
+                    <h3>Asmani Formula Beauty Cream</h3>
+                    <p class="slide-price">PKR 350</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Formula Beauty Cream', 'PKR 350')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="anti acne facewash.jpeg" alt="Asmani Acne Facewash">
+                    <h3>Asmani Acne Facewash</h3>
+                    <p class="slide-price">PKR 350</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Acne Facewash', 'PKR 350')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="sunblock.jpeg" alt="Asmani Sun Block">
+                    <h3>Asmani Sun Block</h3>
+                    <p class="slide-price">PKR 300</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Sun Block', 'PKR 300')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="600">
+                    <img src="urgent whitening serum.jpeg" alt="Asmani Skin Serum">
+                    <h3>Asmani Skin Serum</h3>
+                    <p class="slide-price">PKR 450</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Skin Serum', 'PKR 450')">Buy Now</button>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="herbal oil.jpeg" alt="Asmani Herbal Oil 100ml">
+                    <h3>Asmani Herbal Oil 100ml</h3>
+                    <p class="slide-price">PKR 500</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Herbal Oil 100ml', 'PKR 500')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="herbal oil.jpeg" alt="Asmani Herbal Oil 200ml">
+                    <h3>Asmani Herbal Oil 200ml</h3>
+                    <p class="slide-price">PKR 700</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Herbal Oil 200ml', 'PKR 700')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="formula beauty cream.jpeg" alt="Asmani Formula Beauty Cream">
+                    <h3>Asmani Formula Beauty Cream</h3>
+                    <p class="slide-price">PKR 350</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Formula Beauty Cream', 'PKR 350')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="anti acne facewash.jpeg" alt="Asmani Acne Facewash">
+                    <h3>Asmani Acne Facewash</h3>
+                    <p class="slide-price">PKR 350</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Acne Facewash', 'PKR 350')">Buy Now</button>
+                </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="sunblock.jpeg" alt="Asmani Sun Block">
+                    <h3>Asmani Sun Block</h3>
+                    <p class="slide-price">PKR 300</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Sun Block', 'PKR 300')">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Radio Broadcast Schedule (NEW) -->
+    <section id="radio-broadcast-schedule" data-aos="fade-up">
+        <div class="container">
+            <div class="rbs-surface">
+                <div class="rbs-header">
+                    <h2 class="section-title">📻 Radio Broadcast Schedule</h2>
+                    <p class="rbs-subtitle">Auto-plays the correct station during each time slot (checks every 30 seconds). You can always change the station by frequency from the dropdown or station cards.</p>
+                    <ul class="rbs-timings">
+                        <li>⏰ <strong>9:00–10:00 AM</strong></li>
+                        <li>⏰ <strong>3:00–4:00 PM</strong></li>
+                        <li>⏰ <strong>10:00–11:00 PM</strong></li>
+                    </ul>
+                </div>
+
+                <div class="rbs-grid">
+                    <div class="rbs-player">
+                        <div class="rbs-player-top">
+                            <div class="rbs-now">
+                                <div class="rbs-chip">🕒 <strong>Now:</strong> <span id="rbs-now-time">--:--</span></div>
+                                <div class="rbs-chip">📅 <strong>Slot:</strong> <span id="rbs-now-slot">No live slot right now</span></div>
+                                <button class="rbs-broadcast-btn" id="rbs-broadcast-indicator" type="button" hidden>Broadcasting Now</button>
+                                <div style="color:#777; font-size:0.9rem;">Auto-load happens when a slot starts. Manual selection won’t be overridden until the next slot.</div>
+                            </div>
+                            <div class="rbs-picker">
+                                <label for="rbs-station-select">Change station (frequency):</label>
+                                <select id="rbs-station-select" aria-label="Station selection"></select>
+                            </div>
+                        </div>
+
+                        <div class="rbs-controls" aria-label="Player Controls">
+                            <div class="grp">
+                                <button class="rbs-btn primary" id="rbs-btn-play" type="button">▶️ Play</button>
+                                <button class="rbs-btn" id="rbs-btn-pause" type="button">⏸️ Pause</button>
+                                <button class="rbs-btn danger" id="rbs-btn-stop" type="button">⏹️ Stop</button>
+                                <button class="rbs-btn" id="rbs-btn-mute" type="button">🔇 Mute</button>
+                                <button class="rbs-btn" id="rbs-btn-unmute" type="button">🔊 Unmute</button>
+                            </div>
+                            <div class="grp">
+                                <div class="rbs-volume">
+                                    <span>🔉 Volume</span>
+                                    <input id="rbs-volume" type="range" min="0" max="1" step="0.05" value="1" />
+                                </div>
+                                <button class="rbs-btn" id="rbs-btn-reload" type="button">🔄 Reload</button>
+                                <button class="rbs-btn" id="rbs-btn-open" type="button">🌐 Open</button>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                            <h3 style="margin:0; font-size:1.2rem; color:#222;" id="rbs-current-station-name">Select a Station</h3>
+                            <div style="color:#666;" id="rbs-current-station-status">Click any station to start listening</div>
+                        </div>
+
+                        <div class="rbs-player-area" id="rbs-player-area">
+                            <div class="rbs-placeholder">
+                                <div style="font-size:48px; opacity:0.35;">📻</div>
+                                <div>Waiting for station selection…</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="rbs-time-slots" aria-label="Radio schedule slots"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories-section" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-grid">
+                <a href="categories.html?category=Skincare" class="category-card category-link" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-spa"></i>
+                    <h3>Skincare</h3>
+                </a>
+                <a href="index.html#arrivals" class="category-card category-link" data-aos="zoom-in" data-aos-delay="200">
+                    <i class="fas fa-star"></i>
+                    <h3>New Arrivals</h3>
+                </a>
+                <a href="categories.html?category=Haircare" class="category-card category-link" data-aos="zoom-in" data-aos-delay="300">
+                    <i class="fas fa-wind"></i>
+                    <h3>Haircare</h3>
+                </a>
+                <a href="shop.html" class="category-card category-link" data-aos="zoom-in" data-aos-delay="400">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>All Products</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Products Section -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2 class="section-title">Top Products</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals Section -->
+    <section id="arrivals" class="arrivals-section" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title">New Arrivals</h2>
+            <div class="products-grid" id="arrivalsGrid" data-aos="fade-up">
+                <!-- New arrivals will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section id="reviews" class="reviews-section" data-aos="fade-up">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Fatima Ahmad</h4>
+                            <p class="reviewer-product">Herbal Oil</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">میں نے یہ تیل اپنے خشک اور نقصان پہنچے بالوں کے لیے خریدا تھا کیونکہ میں نے کیمیکل ٹریٹمنٹ کرائے تھے۔ ایک مہینے تک ہفتے میں دو بار استعمال کیا تو بال نرمی محسوس ہو رہے ہیں۔ قدرتی خوشبو اچھی ہے اور یہ جلدی جذب ہو جاتا ہے، کوئی ریزڈیو نہیں چھوڑتا۔</p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Aisha Khan</h4>
+                            <p class="reviewer-product">Beauty Cream</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Sardi mein meri skin bohot dry ho jati hai. Maine bahut si creams try ki hain lekin yeh wali pura din chehra hydrated rakh deti hai. Subah aur raat lagati hoon, aur ab skin tight ya dry feel nahi hoti. Rozana use ke liye bohot achi hai.</p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Zainab Ali</h4>
+                            <p class="reviewer-product">Acne Facewash</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I have combination skin with occasional breakouts. This facewash helped reduce my acne but it does make my skin feel quite dry after washing. I use it every other day and follow with moisturizer. Results took about 3 weeks to show.</p>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Ahmad Ali</h4>
+                            <p class="reviewer-product">Herbal Oil</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">میں قدرتی تیلوں کے بارے میں شک میں تھی لیکن اس نے مجھے حیران کر دیا۔ خوشبو دراصل اچھی ہے - تازہ جڑی بوٹیاں جیسی، ادویہ جیسی نہیں۔ میں اسے ہفتے کے روز پیش واش ٹریٹمنٹ کے طور پر استعمال کرتی ہوں۔ میرا سر اسکین اب صحت مند محسوس ہوتا ہے اور کم خارش محسوس ہوتی ہے۔</p>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Maryam Hassan</h4>
+                            <p class="reviewer-product">Sun Block</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I live in a sunny climate and needed better sun protection. This sunscreen works well - no sunburn after long outdoor activities. The only issue is it leaves a slight white cast that takes time to blend in. I apply it 20 minutes before going out.</p>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Sarah Mohammad</h4>
+                            <p class="reviewer-product">Skin Serum</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Maine yeh serum apni dull skin ke liye shuru kiya tha. Ek week mein hi chehra bright dikhai dene laga. Yeh lightweight hai aur skin ko oily nahi karta. Main ise cleansing ke baad, moisturizer se pehle lagati hoon. Mere busy morning routine ke liye perfect hai.</p>
+                </div>
+
+                <!-- Review 7 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Hira Mohammad</h4>
+                            <p class="reviewer-product">Herbal Oil</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">حمل کے بعد میرے بال بے جان لگ رہے تھے۔ اس تیل نے وہ چمک واپس لے آئی جو میں کھو چکی تھی۔ میں اسے اپنے سر اسکین میں مالش کرتی ہوں اور شیمپو کرنے سے ایک گھنٹہ پہلے چھوڑ دیتی ہوں۔ نتائج دھیرے دھیرے ہیں لیکن مستقل - میرے بال مجموعی طور پر صحت مند محسوس ہوتے ہیں۔</p>
+                </div>
+
+
+                <!-- Review 9 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="900">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Amina Hassan</h4>
+                            <p class="reviewer-product">Beauty Cream</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I have mature skin and this cream helps with dryness around my eyes. The texture is rich and creamy, which works well for night time, but it's a bit heavy for daytime use under makeup. I use it as an overnight treatment.</p>
+                </div>
+
+                <!-- Review 10 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Faisal Khan</h4>
+                            <p class="reviewer-product">Sun Block</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I have oily skin and was worried about sunscreen clogging my pores. This one is non-comedogenic and doesn't break me out. I wear it daily for work and haven't had any issues. The coverage is good without feeling heavy.</p>
+                </div>
+
+                <!-- Review 11 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Rabia Sultan</h4>
+                            <p class="reviewer-product">Skin Serum</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Main bohot travel karti hoon, mujhe aise products chahiye jo fast kaam karein. Yeh serum seconds mein absorb ho jata hai aur skin ko greasy nahi chhorda. Main ise flights mein lagati hoon jab full routine nahi kar sakti. Dry plane air mein bhi meri skin hydrated rehti hai.</p>
+                </div>
+
+                <!-- Review 12 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Noor Ahmed</h4>
+                            <p class="reviewer-product">Herbal Oil</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">The oil has a nice consistency - not too thick or runny. I use it for my ends that get damaged from heat styling. The bottle is convenient for travel but I wish it was larger since I use it daily. Good value for the quality.</p>
+                </div>
+
+                <!-- Review 13 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Sana Khan</h4>
+                            <p class="reviewer-product">Beauty Cream</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">یہ کریم میرے خشک پچوں کے لیے مؤثر ہے لیکن قیمت دیکھ کر حیران رہ گئی۔ جس مقدار میں ملتا ہے اس کے لیے یہ دواخانے کے اختیارات کے مقابلے میں مہنگا محسوس ہوتا ہے۔ لیکن یہ کہنے کو کہ معیار واضح طور پر بہتر ہے اور یہ طویل وقت تک چلتا ہے کیونکہ تھوڑا سا استعمال کرتے ہیں۔</p>
+                </div>
+
+                <!-- Review 14 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Hassan Ali</h4>
+                            <p class="reviewer-product">Facewash</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I work in a dusty environment and need thorough cleansing. This facewash does a great job removing makeup and impurities. My skin feels clean without being stripped. I don't get that tight feeling that cheap facewashes give me.</p>
+                </div>
+
+                <!-- Review 15 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Layla Mohammad</h4>
+                            <p class="reviewer-product">Sun Block</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">The SPF protection is reliable - I tested it during a beach vacation and didn't burn. However, it has a sticky residue that takes time to sink in. I apply it early and give it 15 minutes before getting dressed. Worth it for the protection though.</p>
+                </div>
+
+                <!-- Review 16 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Dina Hassan</h4>
+                            <p class="reviewer-product">Skin Serum</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I use this before foundation for a natural glow. It makes my skin look more radiant and even. The formula is stable and doesn't separate. I started seeing results after consistent use for two weeks. Good for mature skin.</p>
+                </div>
+
+                <!-- Review 17 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Kamran Malik</h4>
+                            <p class="reviewer-product">Herbal Oil</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">The oil quality is good - it penetrates well and nourishes my scalp. However, the herbal scent is quite strong and lingers. I use it at night so it doesn't bother me during the day. For people sensitive to smells, this might be too much.</p>
+                </div>
+
+                <!-- Review 18 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="800">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Isha Khan</h4>
+                            <p class="reviewer-product">Beauty Cream</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">After using retinoids that irritated my skin, I switched to this gentler cream. My skin texture has improved noticeably - pores look smaller and fine lines are less visible. I use it twice daily and my skin tolerates it well.</p>
+                </div>
+
+                <!-- Review 19 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="900">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Bilal Ahmed</h4>
+                            <p class="reviewer-product">Facewash</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">This facewash works well for my sensitive skin - no irritation or redness. The pump dispenser is convenient. My only complaint is the bottle size - I go through it quickly and wish it came in a larger format for better value.</p>
+                </div>
+
+                <!-- Review 20 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Samira Khan</h4>
+                            <p class="reviewer-product">Sun Block</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Perfect for everyday use in our sunny climate. I apply it under makeup and it doesn't pill or change the foundation. The protection lasts through my 8-hour workday. I reapply at lunch if I'm outside more.</p>
+                </div>
+
+                <!-- Review 21 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Yasmin Hassan</h4>
+                            <p class="reviewer-product">Skin Serum</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I expected faster results from this serum but the changes are gradual. After 6 weeks of daily use, my hyperpigmentation has faded noticeably. It's a commitment but the results are worth it for someone patient.</p>
+                </div>
+
+                <!-- Review 22 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Omar Khan</h4>
+                            <p class="reviewer-product">Herbal Oil</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I love that this oil uses natural ingredients - no harsh chemicals. It feels authentic, not synthetic. I use it as a finishing oil on damp hair. My curls look healthier and the frizz is controlled. Takes some practice to apply the right amount.</p>
+                </div>
+
+                <!-- Review 23 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Leila Mohammad</h4>
+                            <p class="reviewer-product">Beauty Cream</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">This cream absorbs quickly without leaving a greasy residue. Perfect for layering under makeup. I wake up with hydrated skin even in air-conditioned rooms. The scent is subtle and doesn't interfere with my perfume.</p>
+                </div>
+
+                <!-- Review 24 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Tariq Ahmed</h4>
+                            <p class="reviewer-product">Facewash</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">The cleansing power is impressive - removes all traces of makeup and pollution. My skin feels thoroughly clean. However, at this price point, I expected a larger bottle or better packaging. Still, the quality justifies the cost for me.</p>
+                </div>
+
+                <!-- Review 25 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Nadia Ali</h4>
+                            <p class="reviewer-product">Sun Block</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">The consistency is quite thick, which makes it hard to spread evenly. I have to warm it between my fingers first. But the protection is solid - I didn't burn during a 4-hour outdoor event. I just wish it spread more easily.</p>
+                </div>
+
+                <!-- Review 26 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Reza Hassan</h4>
+                            <p class="reviewer-product">Skin Serum</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">This serum delivers visible results quickly. My skin looked more radiant after just 3 days. I have combination skin and it doesn't make me breakout. The dropper is precise and prevents waste. Highly recommend for anyone wanting fast, noticeable improvement.</p>
+                </div>
+
+                <!-- Review 27 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Maya Khan</h4>
+                            <p class="reviewer-product">Herbal Oil</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">The oil quality is excellent but it can feel heavy on my fine hair. I use less than recommended and focus on the ends. For thicker hair types this would be perfect. The nourishment benefits outweigh the slight heaviness for me.</p>
+                </div>
+
+                <!-- Review 28 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="800">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Adil Khan</h4>
+                            <p class="reviewer-product">Beauty Cream</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">سالوں کی جلد کی پریشانیوں کے بعد، اس کریم نے اصل فرق پیدا کیا ہے۔ میری جلد پرسکون اور زیادہ یکساں رنگت والی ہے۔ بہتری دوسروں کو بھی نظر آتی ہے - لوگ کہتے ہیں کہ میری جلد کتنی اچھی لگتی ہے۔ اعتماد میں اضافے کے لیے ہر پیسے کے لائق ہے۔</p>
+                </div>
+
+                <!-- Review 29 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="900">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Wara Ali</h4>
+                            <p class="reviewer-product">Facewash</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Polluted city mein rehti hoon, mujhe effective cleansing chahiye. Yeh facewash pura din ka grime aur pollution remove kar deti hai. Meri skin thoroughly clean feel karti hai. Long days ke baad bhi koi irritation nahi. Lather rich hai aur scent clean hai, overpowering nahi.</p>
+                </div>
+
+                <!-- Review 30 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Hana Hassan</h4>
+                            <p class="reviewer-product">Sun Block</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I use this every day for work and it provides reliable protection. No sunburns or tanning despite being outside. The texture blends well under makeup and doesn't leave white marks. Totally worth the investment for skin health.</p>
+                </div>
+
+
+                <!-- Review 32 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Zara Khan</h4>
+                            <p class="reviewer-product">Herbal Oil</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">Coloring ke baad mere baal easily break ho rahe the. Yeh oil ne bohot bara farq banaya hai - kam breakage aur strong strands. Main ise mask ke tor par ek baar week mein lagati hoon aur daily thoda sa use karti hoon. Change tab notice hota hai jab main ungliyan baalon mein pherti hoon.</p>
+                </div>
+
+                <!-- Review 33 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Khalid Ahmed</h4>
+                            <p class="reviewer-product">Beauty Cream</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">The cream works well for my dry skin but I find it expensive for what you get. A little goes a long way, so it lasts, but I still think the price could be more competitive. The results are good though - my skin stays moisturized.</p>
+                </div>
+
+                <!-- Review 34 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Saira Khan</h4>
+                            <p class="reviewer-product">Facewash</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">I have sensitive skin that reacts to most products. This facewash is gentle and doesn't cause any irritation. It cleans effectively without stripping natural oils. Perfect for my morning routine - leaves skin soft and ready for moisturizer.</p>
+                </div>
+
+                <!-- Review 35 -->
+                <div class="review-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <h4 class="reviewer-name">Imran Hassan</h4>
+                            <p class="reviewer-product">Sun Block</p>
+                        </div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">ہمارے گرم گرمیوں کے موسم کے لیے ضروری ہے۔ میں باہر کی سرگرمیوں سے پہلے اسے لگاتی ہوں اور ایک بار بھی سن برن نہیں ہوا۔ پسینے میں بھی یہ آنکھوں میں نہیں جاتا۔ وسیع طیف تحفظ سمندر کے دنوں اور پیدل سفر کے دوران مجھے اطمینان دلاتا ہے۔</p>
+                </div>
+            </div>
+
+            <!-- Pagination Buttons -->
+            <div class="pagination-container">
+                <button class="pagination-btn active" onclick="changePage(1)">1</button>
+                <button class="pagination-btn" onclick="changePage(2)">2</button>
+                <button class="pagination-btn" onclick="changePage(3)">3</button>
+                <button class="pagination-btn" onclick="changePage(4)">4</button>
+                <button class="pagination-btn" onclick="changePage(5)">5</button>
+                <button class="pagination-btn" onclick="changePage(6)">6</button>
+                <button class="pagination-btn" onclick="changePage(7)">7</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Asmani Cosmetics</h3>
+                    <p>Asmani Cosmetics brings you premium, ethically-sourced beauty products designed to enhance your natural elegance. We believe in quality, luxury, and self-confidence.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>📞 WhatsApp: <a href="https://wa.me/923008562371" target="_blank" class="whatsapp-link">+92 300 8562371</a></p>
+                    <p>📧 Email: <a href="mailto:info@asmanicosemtics.com">info@asmanicosemtics.com</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1GEHZDPBgn/" target="_blank" aria-label="Facebook" rel="noopener"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.tiktok.com/@asmani_cosmetics?_r=1&_t=ZS-93GRq3OFGZp" target="_blank" aria-label="TikTok" rel="noopener"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/923008562371" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Asmani Cosmetics. All rights reserved. | Luxury Beauty Redefined</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false,
+            offset: 100
+        });
+    </script>
+    <script src="script.js"></script>
+
+    <script>
+        // Radio Broadcast Schedule (scoped JS)
+        (function() {
+            const RBS_STATIONS = {
+                'suno-fm': { frequency: '96 FM', name: 'Suno FM', type: 'iframe', url: 'https://onlineradiobox.com/pk/sunourdu/' },
+                'global-fm': { frequency: '91 FM', name: 'Global FM', type: 'iframe', url: 'https://mytuner-radio.com/radio/global-fm-91-492432/' },
+                'zalmy-fm': { frequency: '90 FM', name: 'Zalmy FM', type: 'unavailable', facebook: 'https://www.facebook.com/zalmayfm90/', youtube: 'https://www.youtube.com/c/zalmayfm90official' },
+                'watan-fm': { frequency: '90.4 FM', name: 'Watan FM', type: 'iframe', url: 'https://zeno.fm/radio/watan-fm/' },
+                'hangu-fm': { frequency: '99 FM', name: 'Hangu FM', type: 'audio', url: 'https://uk25freenew.listen2myradio.com/live.mp3?typeportmount=s1_39026_stream_16338540' },
+                'valley-fm': { frequency: '103 FM', name: 'Valley FM', type: 'iframe', url: 'https://zeno.fm/radio/radio-valley-fm-103/' },
+                'lakki-fm': { frequency: '88 FM', name: 'Lakki FM', type: 'iframe', url: 'https://www.radio-addict.com/en/stream-6UHdXnzjMHcXD9HSMZoES8/listen-Radio-Lakki-Marwat-FM-88' },
+                'dabang-fm': { frequency: '90.4 FM', name: 'Dabang FM', type: 'iframe', url: 'https://zeno.fm/radio/dabang-radio-fm-90-4-attock/' },
+                'umeed-fm': { frequency: '97 FM', name: 'Umeed FM', type: 'iframe', url: 'https://umeedradio.com/listen-live' },
+                'pegham-fm': { frequency: '97.4 FM', name: 'Pegham FM', type: 'audio', url: 'https://uk22freenew.listen2myradio.com/live.mp3?typeportmount=s1_13467_stream_56714146' }
+            };
+
+            const RBS_SCHEDULE = [
+                { id: 1, timeLabel: '9 to 10 AM', startHour: 9, startMinute: 0, endHour: 10, endMinute: 0, stations: ['suno-fm', 'global-fm', 'zalmy-fm', 'watan-fm', 'hangu-fm', 'valley-fm'], defaultStation: 'hangu-fm' },
+                { id: 2, timeLabel: '3 to 4 PM', startHour: 15, startMinute: 0, endHour: 16, endMinute: 0, stations: ['lakki-fm', 'dabang-fm', 'umeed-fm', 'pegham-fm', 'global-fm'], defaultStation: 'pegham-fm' },
+                { id: 3, timeLabel: '10 to 11 PM', startHour: 22, startMinute: 0, endHour: 23, endMinute: 0, stations: ['lakki-fm', 'global-fm', 'zalmy-fm'], defaultStation: 'lakki-fm' }
+            ];
+
+            let rbsCurrentStation = null;
+            let rbsAudio = null;
+            let rbsCurrentType = null;
+            let rbsCurrentUrl = null;
+            let rbsLastActiveSlotId = null;
+            let rbsUserSelectedInSlot = false;
+
+            function $(id) { return document.getElementById(id); }
+
+            function rbsIsSlotActive(slot) {
+                const now = new Date();
+                const currentTime = now.getHours() * 60 + now.getMinutes();
+                const startTime = slot.startHour * 60 + slot.startMinute;
+                const endTime = slot.endHour * 60 + slot.endMinute;
+                return currentTime >= startTime && currentTime < endTime;
+            }
+
+            function rbsGetActiveSlot() {
+                return RBS_SCHEDULE.find(s => rbsIsSlotActive(s));
+            }
+
+            function rbsFormatNow(date) {
+                const h = date.getHours();
+                const m = String(date.getMinutes()).padStart(2, '0');
+                const ampm = h >= 12 ? 'PM' : 'AM';
+                const h12 = ((h + 11) % 12 + 1);
+                return `${h12}:${m} ${ampm}`;
+            }
+
+            function rbsUpdateNowInfo() {
+                const now = new Date();
+                const active = rbsGetActiveSlot();
+                $('rbs-now-time').textContent = rbsFormatNow(now);
+                $('rbs-now-slot').textContent = active ? `${active.timeLabel}` : 'No live slot right now';
+                const liveBtn = $('rbs-broadcast-indicator');
+                if (active) {
+                    liveBtn.hidden = false;
+                } else {
+                    liveBtn.hidden = true;
+                }
+            }
+
+            function rbsGetPickerStationIds() {
+                const active = rbsGetActiveSlot();
+                if (active) return active.stations;
+                const ids = new Set();
+                RBS_SCHEDULE.forEach(s => s.stations.forEach(id => ids.add(id)));
+                return Array.from(ids);
+            }
+
+            function rbsRenderPicker() {
+                const select = $('rbs-station-select');
+                const ids = rbsGetPickerStationIds();
+                select.innerHTML = '';
+                ids.forEach(id => {
+                    const st = RBS_STATIONS[id];
+                    const opt = document.createElement('option');
+                    opt.value = id;
+                    opt.textContent = `${st.frequency} — ${st.name}`;
+                    select.appendChild(opt);
+                });
+                if (rbsCurrentStation && ids.includes(rbsCurrentStation)) {
+                    select.value = rbsCurrentStation;
+                } else if (ids[0]) {
+                    select.value = ids[0];
+                }
+            }
+
+            function rbsSetControlsEnabled(enabled) {
+                ['rbs-btn-play','rbs-btn-pause','rbs-btn-stop','rbs-btn-mute','rbs-btn-unmute','rbs-volume'].forEach(id => {
+                    const el = $(id);
+                    if (!el) return;
+                    el.disabled = !enabled;
+                });
+            }
+
+            function rbsSyncControls() {
+                const openBtn = $('rbs-btn-open');
+                const reloadBtn = $('rbs-btn-reload');
+
+                if (rbsCurrentType === 'audio') {
+                    rbsSetControlsEnabled(true);
+                    openBtn.disabled = !rbsCurrentUrl;
+                    reloadBtn.disabled = false;
+                } else if (rbsCurrentType === 'iframe') {
+                    // Can't control play/pause for cross-origin iframes.
+                    rbsSetControlsEnabled(false);
+                    openBtn.disabled = !rbsCurrentUrl;
+                    reloadBtn.disabled = false;
+                } else {
+                    rbsSetControlsEnabled(false);
+                    openBtn.disabled = true;
+                    reloadBtn.disabled = true;
+                }
+
+                if (rbsAudio && rbsCurrentType === 'audio') {
+                    $('rbs-btn-mute').disabled = rbsAudio.muted;
+                    $('rbs-btn-unmute').disabled = !rbsAudio.muted;
+                    $('rbs-btn-play').disabled = !rbsAudio.paused;
+                    $('rbs-btn-pause').disabled = rbsAudio.paused;
+                }
+            }
+
+            function rbsRenderSlots() {
+                const container = $('rbs-time-slots');
+                container.innerHTML = '';
+
+                RBS_SCHEDULE.forEach(slot => {
+                    const active = rbsIsSlotActive(slot);
+                    const card = document.createElement('div');
+                    card.className = `rbs-slot ${active ? 'active' : ''}`;
+
+                    const head = document.createElement('div');
+                    head.className = 'rbs-slot-head';
+                    head.innerHTML = `
+                        <div class="rbs-slot-time">🕐 ${slot.timeLabel}</div>
+                        ${active ? '<div class="rbs-live">Broadcasting</div>' : ''}
+                    `;
+                    card.appendChild(head);
+
+                    const grid = document.createElement('div');
+                    grid.className = 'rbs-stations';
+
+                    slot.stations.forEach(id => {
+                        const st = RBS_STATIONS[id];
+                        const s = document.createElement('div');
+                        s.className = `rbs-station ${rbsCurrentStation === id ? 'active' : ''}`;
+                        s.dataset.stationId = id;
+                        s.innerHTML = `
+                            <div style="font-size:26px;">📻</div>
+                            <div class="freq">${st.frequency}</div>
+                            <div class="nm">${st.name}</div>
+                        `;
+                        s.addEventListener('click', () => rbsLoadStation(id, { reason: 'user' }));
+                        grid.appendChild(s);
+                    });
+
+                    card.appendChild(grid);
+                    container.appendChild(card);
+                });
+            }
+
+            function rbsLoadUnavailable(st) {
+                const area = $('rbs-player-area');
+                area.innerHTML = `
+                    <div class="rbs-unavailable">
+                        <h4 style="margin:0 0 8px;">📻 ${st.frequency} ${st.name}</h4>
+                        <div>Not available online yet.</div>
+                        <div class="rbs-links">
+                            <a class="rbs-link" href="${st.facebook}" target="_blank" rel="noopener">📘 Facebook</a>
+                            <a class="rbs-link youtube" href="${st.youtube}" target="_blank" rel="noopener">▶️ YouTube</a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function rbsLoadIframe(st) {
+                const area = $('rbs-player-area');
+                area.innerHTML = '';
+                const iframe = document.createElement('iframe');
+                iframe.src = st.url;
+                iframe.allow = 'autoplay';
+                area.appendChild(iframe);
+            }
+
+            function rbsLoadAudio(st) {
+                const area = $('rbs-player-area');
+                area.innerHTML = '';
+
+                rbsAudio = document.createElement('audio');
+                rbsAudio.controls = false;
+                rbsAudio.src = st.url;
+                rbsAudio.preload = 'none';
+                area.appendChild(rbsAudio);
+
+                const vol = Number($('rbs-volume').value);
+                rbsAudio.volume = vol;
+
+                const status = $('rbs-current-station-status');
+                const playPromise = rbsAudio.play();
+                if (playPromise && typeof playPromise.then === 'function') {
+                    playPromise.then(() => {
+                        status.textContent = 'Now Playing (direct stream)';
+                    }).catch(() => {
+                        status.textContent = 'Autoplay blocked by browser — tap Play';
+                        const wrap = document.createElement('div');
+                        wrap.style.display = 'flex';
+                        wrap.style.flexDirection = 'column';
+                        wrap.style.alignItems = 'center';
+                        wrap.style.gap = '10px';
+                        wrap.style.color = '#666';
+                        wrap.style.textAlign = 'center';
+                        wrap.innerHTML = '<div>Some browsers block autoplay. Use the button below to start.</div>';
+                        const btn = document.createElement('button');
+                        btn.className = 'rbs-tap';
+                        btn.textContent = '▶️ Tap to Play';
+                        btn.addEventListener('click', async () => {
+                            try {
+                                await rbsAudio.play();
+                                wrap.remove();
+                                status.textContent = 'Now Playing (direct stream)';
+                                rbsSyncControls();
+                            } catch (e) {}
+                        });
+                        wrap.appendChild(btn);
+                        area.appendChild(wrap);
+                    });
+                }
+
+                rbsAudio.addEventListener('play', rbsSyncControls);
+                rbsAudio.addEventListener('pause', rbsSyncControls);
+                rbsAudio.addEventListener('volumechange', rbsSyncControls);
+            }
+
+            function rbsLoadStation(id, opts) {
+                const st = RBS_STATIONS[id];
+                rbsCurrentStation = id;
+                rbsCurrentType = st.type;
+                rbsCurrentUrl = (st.type === 'unavailable') ? null : (st.url || null);
+                if (opts && opts.reason === 'user') rbsUserSelectedInSlot = true;
+
+                $('rbs-current-station-name').textContent = `${st.frequency} ${st.name}`;
+                $('rbs-current-station-status').textContent = st.type === 'unavailable' ? 'Not available online' : 'Ready';
+
+                // reset audio ref
+                rbsAudio = null;
+
+                if (st.type === 'audio') rbsLoadAudio(st);
+                else if (st.type === 'iframe') {
+                    rbsLoadIframe(st);
+                    $('rbs-current-station-status').textContent = 'Listening page (embed) — use controls inside the page';
+                }
+                else rbsLoadUnavailable(st);
+
+                rbsRenderPicker();
+                rbsRenderSlots();
+                rbsSyncControls();
+            }
+
+            function rbsAutoCheck() {
+                const active = rbsGetActiveSlot();
+                rbsUpdateNowInfo();
+                rbsRenderPicker();
+
+                if (!active) {
+                    rbsLastActiveSlotId = null;
+                    rbsUserSelectedInSlot = false;
+                    rbsRenderSlots();
+                    return;
+                }
+
+                if (rbsLastActiveSlotId !== active.id) {
+                    rbsLastActiveSlotId = active.id;
+                    rbsUserSelectedInSlot = false;
+                    rbsLoadStation(active.defaultStation, { reason: 'auto' });
+                    return;
+                }
+
+                if (!rbsUserSelectedInSlot) {
+                    const inSlot = rbsCurrentStation && active.stations.includes(rbsCurrentStation);
+                    if (!inSlot) {
+                        rbsLoadStation(active.defaultStation, { reason: 'auto' });
+                    }
+                }
+
+                rbsRenderSlots();
+            }
+
+            function rbsWireControls() {
+                $('rbs-btn-play').addEventListener('click', async () => {
+                    if (!rbsAudio) return;
+                    try { await rbsAudio.play(); } catch (e) {}
+                    rbsSyncControls();
+                });
+                $('rbs-btn-pause').addEventListener('click', () => {
+                    if (!rbsAudio) return;
+                    rbsAudio.pause();
+                    rbsSyncControls();
+                });
+                $('rbs-btn-stop').addEventListener('click', () => {
+                    if (!rbsAudio) return;
+                    rbsAudio.pause();
+                    try { rbsAudio.currentTime = 0; } catch (e) {}
+                    try { rbsAudio.load(); } catch (e) {}
+                    rbsSyncControls();
+                });
+                $('rbs-btn-mute').addEventListener('click', () => {
+                    if (!rbsAudio) return;
+                    rbsAudio.muted = true;
+                    rbsSyncControls();
+                });
+                $('rbs-btn-unmute').addEventListener('click', () => {
+                    if (!rbsAudio) return;
+                    rbsAudio.muted = false;
+                    rbsSyncControls();
+                });
+                $('rbs-volume').addEventListener('input', (e) => {
+                    if (!rbsAudio) return;
+                    rbsAudio.volume = Number(e.target.value);
+                    rbsSyncControls();
+                });
+                $('rbs-btn-reload').addEventListener('click', () => {
+                    if (!rbsCurrentStation) return;
+                    rbsLoadStation(rbsCurrentStation, { reason: 'user' });
+                });
+                $('rbs-btn-open').addEventListener('click', () => {
+                    if (!rbsCurrentUrl) return;
+                    window.open(rbsCurrentUrl, '_blank');
+                });
+                $('rbs-station-select').addEventListener('change', (e) => {
+                    const id = e.target.value;
+                    if (!id) return;
+                    rbsLoadStation(id, { reason: 'user' });
+                });
+            }
+
+            function rbsInit() {
+                // If section not present, do nothing
+                if (!$('rbs-time-slots')) return;
+                rbsWireControls();
+                rbsUpdateNowInfo();
+                rbsRenderPicker();
+                rbsRenderSlots();
+                rbsSyncControls();
+                rbsAutoCheck();
+                setInterval(rbsAutoCheck, 30000);
+                setInterval(rbsUpdateNowInfo, 1000);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', rbsInit);
+            } else {
+                rbsInit();
+            }
+        })();
+    </script>
+
+    <a class="whatsapp-float" href="https://wa.me/923008562371?text=Hello%20Asmani%20Cosmetics!%20I'm%20interested%20in%20your%20products." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

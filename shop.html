@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop All Products - Asmani Cosmetics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS - Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <div class="logo-a">A</div>
+                    <h1>Asmani Cosmetics</h1>
+                </div>
+            </a>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Products</a></li>
+                    <li><a href="index.html#categories">Categories</a></li>
+                    <li><a href="index.html#footer">Contact</a></li>
+                    <li><a href="#cart-summary" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i> Cart <span id="cartCount" class="cart-count">0</span>
+                    </a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <form class="nav-search" role="search" aria-label="Search products">
+                    <input id="navProductSearch" class="nav-search-input" type="search" placeholder="Search products..." aria-label="Search products" autocomplete="off">
+                    <button class="nav-search-btn" type="submit" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Section -->
+    <section class="shop-section">
+        <div class="container">
+            <div class="shop-header">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back Home
+                </a>
+                <h1 class="shop-title">Shop All Products</h1>
+                <p class="shop-subtitle">Discover our complete collection of premium beauty products</p>
+            </div>
+
+            <div class="shop-container">
+                <!-- Products Grid -->
+                <div class="products-main">
+                    <div class="products-grid" id="allProductsGrid">
+                        <!-- All products will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Cart Sidebar -->
+                <aside class="cart-sidebar" id="cartSidebar">
+                    <div class="cart-header">
+                        <h2><i class="fas fa-shopping-bag"></i> Your Cart</h2>
+                        <button class="cart-close" onclick="toggleCartSidebar()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="cart-items" id="cartItems">
+                        <p class="empty-cart">Your cart is empty</p>
+                    </div>
+
+                    <div class="cart-summary" id="cartSummary">
+                        <div class="summary-item">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">PKR 0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total Items:</span>
+                            <span id="totalItems">0</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span id="total">PKR 0</span>
+                        </div>
+                        <button class="checkout-btn" onclick="checkout()">
+                            <i class="fas fa-whatsapp"></i> Checkout on WhatsApp
+                        </button>
+                        <button class="clear-cart-btn" onclick="clearCart()">
+                            <i class="fas fa-trash"></i> Clear Cart
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- Cart Toggle Button (Mobile) -->
+        <button class="cart-toggle-btn" id="cartToggleBtn" onclick="toggleCartSidebar()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="footer-content">
+            <div class="footer-social" aria-label="Social links">
+                <a href="https://www.facebook.com/share/1GEHZDPBgn/" target="_blank" rel="noopener" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.tiktok.com/@asmani_cosmetics?_r=1&_t=ZS-93GRq3OFGZp" target="_blank" rel="noopener" aria-label="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+            <div class="footer-section">
+                <h3>Asmani Cosmetics</h3>
+                <p>Premium beauty products crafted with care for your natural glow.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html#products">Shop</a>
+                <a href="index.html#categories">Categories</a>
+                <a href="index.html#arrivals">New Arrivals</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Reach out for inquiries and special orders</p>
+                <a href="https://wa.me/923008562371?text=Hello%20Asmani%20Cosmetics!%20I'm%20interested%20in%20your%20products." class="whatsapp-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Asmani Cosmetics. All rights reserved. | Elegance in Every Product</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Shopping Cart System
+        let cart = JSON.parse(localStorage.getItem('asmaniCart')) || [];
+
+        // Initialize the shop page
+        function initShop() {
+            console.log('Initializing shop...');
+            
+            // Check if products are loaded
+            if (typeof products === 'undefined' || typeof newArrivals === 'undefined') {
+                console.log('Products not loaded yet, retrying...');
+                setTimeout(initShop, 200);
+                return;
+            }
+            
+            console.log('✓ Products loaded, initializing display...');
+            displayAllProducts();
+            updateCartDisplay();
+        }
+
+        // Start initialization when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initShop);
+        } else {
+            // DOM is already loaded
+            initShop();
+        }
+
+        /**
+         * Display all products in the shop
+         */
+        function displayAllProducts() {
+            const grid = document.getElementById('allProductsGrid');
+            
+            // Check if products are available
+            if (typeof products === 'undefined' || typeof newArrivals === 'undefined') {
+                console.error('Products not loaded yet');
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">Loading products...</p>';
+                return;
+            }
+            
+            const allProducts = [...products, ...newArrivals];
+            
+            if (allProducts.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No products found</p>';
+                return;
+            }
+            
+            grid.innerHTML = allProducts.map((product, index) => `
+                <div class="product-card" data-aos="fade-up" data-aos-delay="${(index % 4) * 100}">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='placeholder.jpg'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">${product.price}</p>
+                        <p class="product-category">${product.category}</p>
+                        <div class="product-controls">
+                            <button class="qty-btn minus-btn" onclick="decreaseQty(${product.id})">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" class="qty-input" id="qty-${product.id}" value="1" min="1" max="100">
+                            <button class="qty-btn plus-btn" onclick="increaseQty(${product.id})">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <button class="buy-button" onclick="addToCart(${product.id})">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            console.log(`✓ Loaded ${allProducts.length} products to shop`);
+        }
+
+        /**
+         * Increase quantity for a product
+         */
+        function increaseQty(productId) {
+            const input = document.getElementById(`qty-${productId}`);
+            input.value = Math.min(parseInt(input.value) + 1, 100);
+        }
+
+        /**
+         * Decrease quantity for a product
+         */
+        function decreaseQty(productId) {
+            const input = document.getElementById(`qty-${productId}`);
+            input.value = Math.max(parseInt(input.value) - 1, 1);
+        }
+
+        /**
+         * Add product to cart
+         */
+        function addToCart(productId) {
+            try {
+                // Check if products are available
+                if (typeof products === 'undefined' || typeof newArrivals === 'undefined') {
+                    console.error('Products not loaded');
+                    showNotification('Error: Products not loaded. Please refresh the page.');
+                    return;
+                }
+
+                const allProducts = [...products, ...newArrivals];
+                const product = allProducts.find(p => p.id === productId);
+                const input = document.getElementById(`qty-${productId}`);
+                const qty = parseInt(input.value) || 1;
+
+                if (!product) {
+                    console.error('Product not found:', productId);
+                    showNotification('Error: Product not found');
+                    return;
+                }
+
+                if (!input) {
+                    console.error('Quantity input not found for product:', productId);
+                    showNotification('Error: Could not get quantity');
+                    return;
+                }
+
+                // Check if product already in cart
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    existingItem.quantity += qty;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: product.name,
+                        price: product.priceValue,
+                        priceDisplay: product.price,
+                        quantity: qty
+                    });
+                }
+
+                // Reset quantity input
+                input.value = 1;
+
+                // Save to localStorage
+                localStorage.setItem('asmaniCart', JSON.stringify(cart));
+
+                // Update display
+                updateCartDisplay();
+
+                // Show success feedback
+                showNotification(`✓ ${product.name} added to cart!`);
+
+                console.log(`✓ Added to cart: ${product.name} (Qty: ${qty})`);
+
+                // Auto-show cart on mobile
+                if (window.innerWidth < 768) {
+                    openCartSidebar();
+                }
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+                showNotification('Error: Could not add to cart');
+            }
+        }
+
+        /**
+         * Update quantity of item in cart
+         */
+        function updateCartQuantity(productId, newQty) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                if (newQty <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    item.quantity = newQty;
+                    localStorage.setItem('asmaniCart', JSON.stringify(cart));
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        /**
+         * Remove product from cart
+         */
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            localStorage.setItem('asmaniCart', JSON.stringify(cart));
+            updateCartDisplay();
+            showNotification('Item removed from cart');
+        }
+
+        /**
+         * Update cart display and calculations
+         */
+        function updateCartDisplay() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartBadge = document.getElementById('cartBadge');
+            const subtotalDiv = document.getElementById('subtotal');
+            const totalItemsDiv = document.getElementById('totalItems');
+            const totalDiv = document.getElementById('total');
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
+                cartCount.textContent = '0';
+                cartBadge.textContent = '0';
+                subtotalDiv.textContent = 'PKR 0';
+                totalItemsDiv.textContent = '0';
+                totalDiv.textContent = 'PKR 0';
+                return;
+            }
+
+            // Calculate totals
+            let subtotal = 0;
+            let totalItems = 0;
+
+            cartItemsDiv.innerHTML = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                totalItems += item.quantity;
+
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p class="cart-item-price">${item.priceDisplay}</p>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="cart-qty-btn" onclick="updateCartQuantity(${item.id}, ${item.quantity - 1})">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="cart-qty">${item.quantity}</span>
+                            <button class="cart-qty-btn" onclick="updateCartQuantity(${item.id}, ${item.quantity + 1})">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="cart-item-total">PKR ${itemTotal}</div>
+                        <button class="cart-remove-btn" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            // Update summary
+            cartCount.textContent = totalItems;
+            cartBadge.textContent = totalItems;
+            subtotalDiv.textContent = `PKR ${subtotal}`;
+            totalItemsDiv.textContent = totalItems;
+            totalDiv.textContent = `PKR ${subtotal}`;
+        }
+
+        /**
+         * Toggle cart sidebar visibility
+         */
+        function toggleCartSidebar() {
+            const sidebar = document.getElementById('cartSidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        /**
+         * Open cart sidebar
+         */
+        function openCartSidebar() {
+            const sidebar = document.getElementById('cartSidebar');
+            sidebar.classList.add('active');
+        }
+
+        /**
+         * Clear entire cart
+         */
+        function clearCart() {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                cart = [];
+                localStorage.setItem('asmaniCart', JSON.stringify(cart));
+                updateCartDisplay();
+                showNotification('Cart cleared');
+            }
+        }
+
+        /**
+         * Checkout via WhatsApp
+         */
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            // Use the new bill page for proper invoice + editable quantities
+            window.location.href = 'checkout.html';
+        }
+
+        /**
+         * Show notification message
+         */
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Trigger animation
+            setTimeout(() => notification.classList.add('show'), 10);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false,
+            offset: 100
+        });
+    </script>
+
+    <a class="whatsapp-float" href="https://wa.me/923008562371?text=Hello%20Asmani%20Cosmetics!%20I'm%20interested%20in%20your%20products." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

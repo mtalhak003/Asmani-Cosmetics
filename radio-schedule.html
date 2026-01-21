@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Broadcast Schedule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .radio-schedule-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .schedule-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .schedule-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .schedule-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .schedule-subtext {
+            margin-top: 15px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            padding: 12px 14px;
+            text-align: left;
+            max-width: 800px;
+            backdrop-filter: blur(6px);
+        }
+
+        .schedule-subtext strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .schedule-subtext ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 6px 12px;
+        }
+
+        .schedule-subtext li {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .schedule-subtext li span {
+            opacity: 0.9;
+        }
+
+        /* Player Area */
+        .player-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .player-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .now-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            color: #444;
+            font-size: 0.95rem;
+        }
+
+        .now-info .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #f0f2ff;
+            border: 1px solid #e0e5ff;
+            width: fit-content;
+        }
+
+        .now-info .chip strong {
+            color: #2d2d2d;
+        }
+
+        .station-picker {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 260px;
+            flex: 1;
+        }
+
+        .station-picker label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .station-picker select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            background: white;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .station-picker select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.18);
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 14px;
+            border-radius: 14px;
+            background: #fafafa;
+            border: 1px solid #eee;
+            margin-bottom: 14px;
+        }
+
+        .control-group {
+            display: inline-flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .ctrl-btn {
+            background: white;
+            border: 1px solid #ddd;
+            color: #333;
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+
+        .ctrl-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            border-color: #cfcfcf;
+        }
+
+        .ctrl-btn.primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .ctrl-btn.danger {
+            border-color: #ffd6d6;
+            background: #fff5f5;
+            color: #b00020;
+        }
+
+        .ctrl-btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .volume {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #555;
+        }
+
+        .volume input[type="range"] {
+            width: 160px;
+        }
+
+        .small-note {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .player-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .player-info h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .player-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .player-content {
+            background: #f5f5f5;
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-content audio {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .player-content iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .player-placeholder {
+            text-align: center;
+            color: #999;
+        }
+
+        .player-placeholder .radio-icon-large {
+            font-size: 60px;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        .tap-to-play-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .autoplay-note {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            text-align: center;
+            color: #666;
+            padding: 10px;
+        }
+
+        .tap-to-play-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+        }
+
+        .tap-to-play-btn:active {
+            transform: translateY(0);
+        }
+
+        .station-unavailable {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .station-unavailable h3 {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .station-unavailable p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .external-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .external-link-btn {
+            background: #4267B2;
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .external-link-btn:hover {
+            background: #365899;
+        }
+
+        .external-link-btn.youtube {
+            background: #FF0000;
+        }
+
+        .external-link-btn.youtube:hover {
+            background: #CC0000;
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .time-slot-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .time-slot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .time-slot-card.active {
+            border: 3px solid #4CAF50;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        .time-slot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .time-slot-time {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .time-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .time-slot-time h3 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .live-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .live-badge::before {
+            content: '🔴';
+            font-size: 0.8rem;
+        }
+
+        .stations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .station-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .station-card:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .station-card.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #4CAF50;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .station-card .radio-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .station-card .frequency {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .station-card .name {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .schedule-header h1 {
+                font-size: 2rem;
+            }
+
+            .player-section {
+                padding: 20px;
+            }
+
+            .player-info h2 {
+                font-size: 1.3rem;
+            }
+
+            .time-slot-card {
+                padding: 20px;
+            }
+
+            .time-slot-time h3 {
+                font-size: 1.2rem;
+            }
+
+            .stations-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .player-content iframe {
+                height: 300px;
+            }
+
+            .volume input[type="range"] {
+                width: 140px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .schedule-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .stations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .time-slot-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .player-controls {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="radio-schedule-container">
+        <div class="schedule-header">
+            <h1>📻 Radio Broadcast Schedule</h1>
+            <p>Auto-plays the correct station during each time slot (checks every 30 seconds). You can switch stations anytime.</p>
+            <div class="schedule-subtext">
+                <strong>Broadcast timings (local time):</strong>
+                <ul>
+                    <li>⏰ <span>9:00–10:00 AM</span></li>
+                    <li>⏰ <span>3:00–4:00 PM</span></li>
+                    <li>⏰ <span>10:00–11:00 PM</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Player Section -->
+        <div class="player-section">
+            <div class="player-header">
+                <div class="player-icon">📻</div>
+                <div class="player-info">
+                    <h2 id="current-station-name">Select a Station</h2>
+                    <p id="current-station-status">Click any station to start listening</p>
+                </div>
+            </div>
+
+            <div class="player-meta">
+                <div class="now-info">
+                    <div class="chip" id="now-time-chip">🕒 <strong>Now:</strong> <span id="now-time">--:--</span></div>
+                    <div class="chip" id="now-slot-chip">📅 <strong>Slot:</strong> <span id="now-slot">No live slot right now</span></div>
+                    <div class="small-note">Auto-load happens when a slot starts. Your manual selection won’t be overridden until the next slot.</div>
+                </div>
+
+                <div class="station-picker">
+                    <label for="station-select">Change station (frequency):</label>
+                    <select id="station-select" aria-label="Station selection"></select>
+                </div>
+            </div>
+
+            <div class="player-controls" aria-label="Player Controls">
+                <div class="control-group">
+                    <button class="ctrl-btn primary" id="btn-play" type="button">▶️ Play</button>
+                    <button class="ctrl-btn" id="btn-pause" type="button">⏸️ Pause</button>
+                    <button class="ctrl-btn danger" id="btn-stop" type="button">⏹️ Stop</button>
+                    <button class="ctrl-btn" id="btn-mute" type="button">🔇 Mute</button>
+                    <button class="ctrl-btn" id="btn-unmute" type="button">🔊 Unmute</button>
+                </div>
+                <div class="control-group">
+                    <div class="volume">
+                        <span>🔉 Volume</span>
+                        <input id="volume-range" type="range" min="0" max="1" step="0.05" value="1" />
+                    </div>
+                    <button class="ctrl-btn" id="btn-reload" type="button">🔄 Reload</button>
+                    <button class="ctrl-btn" id="btn-open" type="button">🌐 Open</button>
+                </div>
+            </div>
+
+            <div class="player-content" id="player-content">
+                <div class="player-placeholder">
+                    <div class="radio-icon-large">📻</div>
+                    <p>Waiting for station selection...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Time Slots -->
+        <div class="time-slots" id="time-slots">
+            <!-- Time slot cards will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // ============= STATION & SCHEDULE DATA =============
+        const STATIONS = {
+            'suno-fm': {
+                frequency: '96 FM',
+                name: 'Suno FM',
+                type: 'iframe',
+                url: 'https://onlineradiobox.com/pk/sunourdu/'
+            },
+            'global-fm': {
+                frequency: '91 FM',
+                name: 'Global FM',
+                type: 'iframe',
+                url: 'https://mytuner-radio.com/radio/global-fm-91-492432/'
+            },
+            'zalmy-fm': {
+                frequency: '90 FM',
+                name: 'Zalmy FM',
+                type: 'unavailable',
+                facebook: 'https://www.facebook.com/zalmayfm90/',
+                youtube: 'https://www.youtube.com/c/zalmayfm90official'
+            },
+            'watan-fm': {
+                frequency: '90.4 FM',
+                name: 'Watan FM',
+                type: 'iframe',
+                url: 'https://zeno.fm/radio/watan-fm/'
+            },
+            'hangu-fm': {
+                frequency: '99 FM',
+                name: 'Hangu FM',
+                type: 'audio',
+                url: 'https://uk25freenew.listen2myradio.com/live.mp3?typeportmount=s1_39026_stream_16338540'
+            },
+            'valley-fm': {
+                frequency: '103 FM',
+                name: 'Valley FM',
+                type: 'iframe',
+                url: 'https://zeno.fm/radio/radio-valley-fm-103/'
+            },
+            'lakki-fm': {
+                frequency: '88 FM',
+                name: 'Lakki FM',
+                type: 'iframe',
+                url: 'https://www.radio-addict.com/en/stream-6UHdXnzjMHcXD9HSMZoES8/listen-Radio-Lakki-Marwat-FM-88'
+            },
+            'dabang-fm': {
+                frequency: '90.4 FM',
+                name: 'Dabang FM',
+                type: 'iframe',
+                url: 'https://zeno.fm/radio/dabang-radio-fm-90-4-attock/'
+            },
+            'umeed-fm': {
+                frequency: '97 FM',
+                name: 'Umeed FM',
+                type: 'iframe',
+                url: 'https://umeedradio.com/listen-live'
+            },
+            'pegham-fm': {
+                frequency: '97.4 FM',
+                name: 'Pegham FM',
+                type: 'audio',
+                url: 'https://uk22freenew.listen2myradio.com/live.mp3?typeportmount=s1_13467_stream_56714146'
+            }
+        };
+
+        const SCHEDULE = [
+            {
+                id: 1,
+                timeLabel: '9:00 – 10:00 AM',
+                startHour: 9,
+                startMinute: 0,
+                endHour: 10,
+                endMinute: 0,
+                stations: ['suno-fm', 'global-fm', 'zalmy-fm', 'watan-fm', 'hangu-fm', 'valley-fm'],
+                defaultStation: 'hangu-fm'
+            },
+            {
+                id: 2,
+                timeLabel: '3:00 – 4:00 PM',
+                startHour: 15,
+                startMinute: 0,
+                endHour: 16,
+                endMinute: 0,
+                stations: ['lakki-fm', 'dabang-fm', 'umeed-fm', 'pegham-fm', 'global-fm'],
+                defaultStation: 'pegham-fm'
+            },
+            {
+                id: 3,
+                timeLabel: '10:00 – 11:00 PM',
+                startHour: 22,
+                startMinute: 0,
+                endHour: 23,
+                endMinute: 0,
+                stations: ['lakki-fm', 'global-fm', 'zalmy-fm'],
+                defaultStation: 'lakki-fm'
+            }
+        ];
+
+        // ============= STATE =============
+        let currentStation = null;
+        let autoplayAttempted = false;
+        let lastActiveSlotId = null;
+        let userSelectedInThisSlot = false;
+        let audioElement = null;
+        let currentStationType = null;
+        let currentStationUrl = null;
+
+        // ============= RENDER FUNCTIONS =============
+        function renderSchedule() {
+            const container = document.getElementById('time-slots');
+            container.innerHTML = '';
+
+            SCHEDULE.forEach(slot => {
+                const isActive = isTimeSlotActive(slot);
+                
+                const slotCard = document.createElement('div');
+                slotCard.className = `time-slot-card ${isActive ? 'active' : ''}`;
+                slotCard.id = `slot-${slot.id}`;
+
+                const header = document.createElement('div');
+                header.className = 'time-slot-header';
+
+                const timeDiv = document.createElement('div');
+                timeDiv.className = 'time-slot-time';
+                timeDiv.innerHTML = `
+                    <div class="time-icon">🕐</div>
+                    <h3>${slot.timeLabel}</h3>
+                `;
+
+                header.appendChild(timeDiv);
+
+                if (isActive) {
+                    const badge = document.createElement('div');
+                    badge.className = 'live-badge';
+                    badge.textContent = 'LIVE NOW';
+                    header.appendChild(badge);
+                }
+
+                slotCard.appendChild(header);
+
+                const stationsGrid = document.createElement('div');
+                stationsGrid.className = 'stations-grid';
+
+                slot.stations.forEach(stationId => {
+                    const station = STATIONS[stationId];
+                    const stationCard = document.createElement('div');
+                    stationCard.className = 'station-card';
+                    stationCard.dataset.stationId = stationId;
+                    
+                    if (currentStation === stationId) {
+                        stationCard.classList.add('active');
+                    }
+
+                    stationCard.innerHTML = `
+                        <div class="radio-icon">📻</div>
+                        <div class="frequency">${station.frequency}</div>
+                        <div class="name">${station.name}</div>
+                    `;
+
+                    stationCard.addEventListener('click', () => {
+                        loadStation(stationId, { reason: 'user' });
+                    });
+
+                    stationsGrid.appendChild(stationCard);
+                });
+
+                slotCard.appendChild(stationsGrid);
+                container.appendChild(slotCard);
+            });
+        }
+
+        function isTimeSlotActive(slot) {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentTime = currentHour * 60 + currentMinute;
+            
+            const startTime = slot.startHour * 60 + slot.startMinute;
+            const endTime = slot.endHour * 60 + slot.endMinute;
+
+            return currentTime >= startTime && currentTime < endTime;
+        }
+
+        function getActiveSlot() {
+            return SCHEDULE.find(slot => isTimeSlotActive(slot));
+        }
+
+        function formatNowTime(date) {
+            const h = date.getHours();
+            const m = date.getMinutes().toString().padStart(2, '0');
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            const h12 = ((h + 11) % 12 + 1);
+            return `${h12}:${m} ${ampm}`;
+        }
+
+        function updateNowInfo() {
+            const now = new Date();
+            const nowTimeEl = document.getElementById('now-time');
+            const nowSlotEl = document.getElementById('now-slot');
+            const activeSlot = getActiveSlot();
+
+            nowTimeEl.textContent = formatNowTime(now);
+            if (activeSlot) {
+                nowSlotEl.textContent = `${activeSlot.timeLabel} (LIVE)`;
+            } else {
+                nowSlotEl.textContent = 'No live slot right now';
+            }
+        }
+
+        function getStationsForPicker() {
+            const activeSlot = getActiveSlot();
+            if (activeSlot) return activeSlot.stations;
+            // No active slot: show all stations (unique)
+            const ids = new Set();
+            SCHEDULE.forEach(s => s.stations.forEach(id => ids.add(id)));
+            return Array.from(ids);
+        }
+
+        function renderStationPicker() {
+            const select = document.getElementById('station-select');
+            const stationIds = getStationsForPicker();
+
+            select.innerHTML = '';
+            stationIds.forEach(id => {
+                const s = STATIONS[id];
+                const opt = document.createElement('option');
+                opt.value = id;
+                opt.textContent = `${s.frequency} — ${s.name}`;
+                select.appendChild(opt);
+            });
+
+            if (currentStation && stationIds.includes(currentStation)) {
+                select.value = currentStation;
+            } else {
+                select.value = stationIds[0] || '';
+            }
+        }
+
+        function setControlsEnabled(enabled) {
+            const ids = ['btn-play', 'btn-pause', 'btn-stop', 'btn-mute', 'btn-unmute', 'volume-range'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.disabled = !enabled;
+            });
+        }
+
+        function loadStation(stationId, opts = { reason: 'user' }) {
+            const station = STATIONS[stationId];
+            const playerContent = document.getElementById('player-content');
+            const stationNameEl = document.getElementById('current-station-name');
+            const stationStatusEl = document.getElementById('current-station-status');
+
+            currentStation = stationId;
+            autoplayAttempted = false;
+            currentStationType = station.type;
+            currentStationUrl = station.type === 'unavailable' ? null : (station.url || null);
+
+            if (opts.reason === 'user') {
+                userSelectedInThisSlot = true;
+            }
+
+            // Update header
+            stationNameEl.textContent = `${station.frequency} ${station.name}`;
+            stationStatusEl.textContent = station.type === 'unavailable' ? 'Not available online' : 'Ready';
+
+            // Clear previous content
+            playerContent.innerHTML = '';
+
+            // Reset any old audio reference
+            audioElement = null;
+
+            // Update active state on cards
+            document.querySelectorAll('.station-card').forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.stationId === stationId) {
+                    card.classList.add('active');
+                }
+            });
+
+            // Keep picker in sync
+            renderStationPicker();
+
+            // Load appropriate player
+            if (station.type === 'audio') {
+                loadAudioPlayer(station);
+            } else if (station.type === 'iframe') {
+                loadIframePlayer(station);
+            } else if (station.type === 'unavailable') {
+                loadUnavailableMessage(station);
+            }
+
+            syncControlState();
+        }
+
+        function loadAudioPlayer(station) {
+            const playerContent = document.getElementById('player-content');
+            const stationStatusEl = document.getElementById('current-station-status');
+            
+            // Create audio element
+            audioElement = document.createElement('audio');
+            audioElement.controls = false;
+            audioElement.src = station.url;
+            audioElement.style.width = '100%';
+            audioElement.preload = 'none';
+
+            playerContent.appendChild(audioElement);
+
+            // Keep volume slider synced
+            const volumeRange = document.getElementById('volume-range');
+            audioElement.volume = Number(volumeRange.value);
+
+            // Try to autoplay
+            const playPromise = audioElement.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    stationStatusEl.textContent = 'Now Playing (direct stream)';
+                    autoplayAttempted = true;
+                }).catch(error => {
+                    // Autoplay blocked - show tap-to-play UI (user gesture)
+                    stationStatusEl.textContent = 'Autoplay blocked by browser — tap Play';
+                    const note = document.createElement('div');
+                    note.className = 'autoplay-note';
+                    note.innerHTML = `
+                        <div>Some browsers block autoplay. Use the button below to start.</div>
+                    `;
+                    const tapButton = document.createElement('button');
+                    tapButton.className = 'tap-to-play-btn';
+                    tapButton.textContent = '▶️ Tap to Play';
+                    tapButton.onclick = async () => {
+                        try {
+                            await audioElement.play();
+                            note.remove();
+                            stationStatusEl.textContent = 'Now Playing (direct stream)';
+                        } catch (e) {
+                            // keep note visible
+                        }
+                    };
+                    note.appendChild(tapButton);
+                    playerContent.appendChild(note);
+                });
+            } else {
+                stationStatusEl.textContent = 'Ready (direct stream)';
+            }
+
+            audioElement.addEventListener('play', () => {
+                syncControlState();
+            });
+            audioElement.addEventListener('pause', () => {
+                syncControlState();
+            });
+            audioElement.addEventListener('volumechange', () => {
+                syncControlState();
+            });
+        }
+
+        function loadIframePlayer(station) {
+            const playerContent = document.getElementById('player-content');
+            const stationStatusEl = document.getElementById('current-station-status');
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = station.url;
+            iframe.allow = 'autoplay';
+            iframe.style.width = '100%';
+            iframe.style.height = '400px';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '10px';
+            
+            playerContent.appendChild(iframe);
+            autoplayAttempted = true;
+            stationStatusEl.textContent = 'Listening page (embed) — use controls inside the page';
+        }
+
+        function loadUnavailableMessage(station) {
+            const playerContent = document.getElementById('player-content');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'station-unavailable';
+            
+            messageDiv.innerHTML = `
+                <h3>📻 ${station.frequency} ${station.name}</h3>
+                <p>This station is not available for online streaming yet.</p>
+                <div class="external-links">
+                    <a href="${station.facebook}" target="_blank" class="external-link-btn">
+                        📘 Visit Facebook Page
+                    </a>
+                    <a href="${station.youtube}" target="_blank" class="external-link-btn youtube">
+                        ▶️ Visit YouTube Channel
+                    </a>
+                </div>
+            `;
+            
+            playerContent.appendChild(messageDiv);
+        }
+
+        function syncControlState() {
+            const openBtn = document.getElementById('btn-open');
+            const reloadBtn = document.getElementById('btn-reload');
+
+            if (currentStationType === 'audio') {
+                setControlsEnabled(true);
+                openBtn.disabled = !currentStationUrl;
+                reloadBtn.disabled = false;
+            } else if (currentStationType === 'iframe') {
+                // Cross-origin embeds can't be play/pause controlled from our page.
+                setControlsEnabled(false);
+                openBtn.disabled = !currentStationUrl;
+                reloadBtn.disabled = false;
+            } else {
+                setControlsEnabled(false);
+                openBtn.disabled = true;
+                reloadBtn.disabled = true;
+            }
+
+            // Volume/mute button states
+            const muteBtn = document.getElementById('btn-mute');
+            const unmuteBtn = document.getElementById('btn-unmute');
+            const playBtn = document.getElementById('btn-play');
+            const pauseBtn = document.getElementById('btn-pause');
+
+            if (audioElement && currentStationType === 'audio') {
+                muteBtn.disabled = audioElement.muted;
+                unmuteBtn.disabled = !audioElement.muted;
+                playBtn.disabled = !audioElement.paused;
+                pauseBtn.disabled = audioElement.paused;
+            }
+        }
+
+        // ============= AUTO-PLAY LOGIC =============
+        function checkAndAutoPlay() {
+            const activeSlot = getActiveSlot();
+
+            updateNowInfo();
+            renderStationPicker();
+
+            if (!activeSlot) {
+                lastActiveSlotId = null;
+                userSelectedInThisSlot = false;
+                renderSchedule();
+                return;
+            }
+
+            // Entering a new slot -> auto-load default station
+            if (lastActiveSlotId !== activeSlot.id) {
+                lastActiveSlotId = activeSlot.id;
+                userSelectedInThisSlot = false;
+                const defaultStationId = activeSlot.defaultStation;
+                loadStation(defaultStationId, { reason: 'auto' });
+                autoplayAttempted = true;
+            }
+
+            // If user hasn't selected anything and current station is not in this slot, load default
+            if (!userSelectedInThisSlot) {
+                const inSlot = currentStation && activeSlot.stations.includes(currentStation);
+                if (!inSlot) {
+                    loadStation(activeSlot.defaultStation, { reason: 'auto' });
+                    autoplayAttempted = true;
+                }
+            }
+            
+            // Update active slot visual
+            renderSchedule();
+        }
+
+        // ============= INITIALIZATION =============
+        function init() {
+            renderSchedule();
+
+            // Wire up player controls
+            document.getElementById('btn-play').addEventListener('click', async () => {
+                if (!audioElement) return;
+                try { await audioElement.play(); } catch (e) {}
+                syncControlState();
+            });
+            document.getElementById('btn-pause').addEventListener('click', () => {
+                if (!audioElement) return;
+                audioElement.pause();
+                syncControlState();
+            });
+            document.getElementById('btn-stop').addEventListener('click', () => {
+                if (!audioElement) return;
+                audioElement.pause();
+                try {
+                    audioElement.currentTime = 0;
+                } catch (e) {}
+                try {
+                    // Re-load to reset live stream buffer
+                    audioElement.load();
+                } catch (e) {}
+                syncControlState();
+            });
+            document.getElementById('btn-mute').addEventListener('click', () => {
+                if (!audioElement) return;
+                audioElement.muted = true;
+                syncControlState();
+            });
+            document.getElementById('btn-unmute').addEventListener('click', () => {
+                if (!audioElement) return;
+                audioElement.muted = false;
+                syncControlState();
+            });
+            document.getElementById('volume-range').addEventListener('input', (e) => {
+                if (!audioElement) return;
+                audioElement.volume = Number(e.target.value);
+                syncControlState();
+            });
+            document.getElementById('btn-reload').addEventListener('click', () => {
+                // Reload current station (useful for both audio and iframe)
+                if (!currentStation) return;
+                loadStation(currentStation, { reason: 'user' });
+            });
+            document.getElementById('btn-open').addEventListener('click', () => {
+                if (!currentStationUrl) return;
+                window.open(currentStationUrl, '_blank');
+            });
+
+            document.getElementById('station-select').addEventListener('change', (e) => {
+                const id = e.target.value;
+                if (!id) return;
+                loadStation(id, { reason: 'user' });
+            });
+
+            updateNowInfo();
+            renderStationPicker();
+            syncControlState();
+            checkAndAutoPlay();
+            
+            // Check every 30 seconds
+            setInterval(checkAndAutoPlay, 30000);
+
+            // Update clock every second (visual only)
+            setInterval(updateNowInfo, 1000);
+        }
+
+        // Start when page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
