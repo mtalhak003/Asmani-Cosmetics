@@ -389,6 +389,11 @@
         }
 
         @media (max-width: 768px) {
+            #radio-broadcast-schedule .rbs-picker {
+                min-width: 0;
+                width: 100%;
+            }
+
             #radio-broadcast-schedule .rbs-volume input[type="range"] {
                 width: 140px;
             }
@@ -401,6 +406,24 @@
         @media (max-width: 480px) {
             #radio-broadcast-schedule .rbs-surface {
                 padding: 18px;
+            }
+
+            #radio-broadcast-schedule .rbs-controls {
+                justify-content: center;
+            }
+
+            #radio-broadcast-schedule .rbs-volume {
+                width: 100%;
+                justify-content: center;
+            }
+
+            #radio-broadcast-schedule .rbs-volume input[type="range"] {
+                width: 100%;
+                max-width: 260px;
+            }
+
+            #radio-broadcast-schedule .rbs-player-area iframe {
+                height: 260px;
             }
 
             #radio-broadcast-schedule .rbs-stations {
@@ -454,8 +477,17 @@
 
     <!-- Sliding Cards Section -->
     <section class="sliding-section" data-aos="fade-up">
-        <div class="sliding-container">
-            <div class="sliding-cards" id="slidingCards">
+        <div class="sliding-wrapper">
+            <div class="sliding-controls" aria-label="Slide navigation">
+                <button id="slidePrevBtn" class="sliding-nav-btn prev" type="button" aria-label="Scroll left">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button id="slideNextBtn" class="sliding-nav-btn next" type="button" aria-label="Scroll right">
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="sliding-container">
+                <div class="sliding-cards" id="slidingCards">
                 <div class="slide-card" data-aos="zoom-in" data-aos-delay="100">
                     <img src="herbal oil.jpeg" alt="Asmani Herbal Oil 100ml">
                     <h3>Asmani Herbal Oil 100ml</h3>
@@ -487,13 +519,13 @@
                     <button class="slide-btn" onclick="handleBuyNow('Asmani Sun Block', 'PKR 300')">Buy Now</button>
                 </div>
                 <div class="slide-card" data-aos="zoom-in" data-aos-delay="600">
-                    <img src="urgent whitening serum.jpeg" alt="Asmani Skin Serum">
-                    <h3>Asmani Skin Serum</h3>
-                    <p class="slide-price">PKR 450</p>
-                    <button class="slide-btn" onclick="handleBuyNow('Asmani Skin Serum', 'PKR 450')">Buy Now</button>
+                    <img src="urgent whitening serum.jpeg" alt="Asmani Acne Serum">
+                    <h3>Asmani Acne Serum</h3>
+                    <p class="slide-price">PKR 150</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Acne Serum', 'PKR 150')">Buy Now</button>
                 </div>
                 <!-- Duplicate for seamless loop -->
-                <div class="slide-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="slide-card" data-loop-start="1" data-aos="zoom-in" data-aos-delay="100">
                     <img src="herbal oil.jpeg" alt="Asmani Herbal Oil 100ml">
                     <h3>Asmani Herbal Oil 100ml</h3>
                     <p class="slide-price">PKR 500</p>
@@ -523,6 +555,13 @@
                     <p class="slide-price">PKR 300</p>
                     <button class="slide-btn" onclick="handleBuyNow('Asmani Sun Block', 'PKR 300')">Buy Now</button>
                 </div>
+                <div class="slide-card" data-aos="zoom-in" data-aos-delay="600">
+                    <img src="urgent whitening serum.jpeg" alt="Asmani Acne Serum">
+                    <h3>Asmani Acne Serum</h3>
+                    <p class="slide-price">PKR 150</p>
+                    <button class="slide-btn" onclick="handleBuyNow('Asmani Acne Serum', 'PKR 150')">Buy Now</button>
+                </div>
+            </div>
             </div>
         </div>
     </section>
@@ -1300,23 +1339,18 @@
     <script>
         // Radio Broadcast Schedule (scoped JS)
         (function() {
+            const RBS_TIME_ZONE = 'Asia/Karachi';
+
             const RBS_STATIONS = {
-                'suno-fm': { frequency: '96 FM', name: 'Suno FM', type: 'iframe', url: 'https://onlineradiobox.com/pk/sunourdu/' },
-                'global-fm': { frequency: '91 FM', name: 'Global FM', type: 'iframe', url: 'https://mytuner-radio.com/radio/global-fm-91-492432/' },
-                'zalmy-fm': { frequency: '90 FM', name: 'Zalmy FM', type: 'unavailable', facebook: 'https://www.facebook.com/zalmayfm90/', youtube: 'https://www.youtube.com/c/zalmayfm90official' },
-                'watan-fm': { frequency: '90.4 FM', name: 'Watan FM', type: 'iframe', url: 'https://zeno.fm/radio/watan-fm/' },
                 'hangu-fm': { frequency: '99 FM', name: 'Hangu FM', type: 'audio', url: 'https://uk25freenew.listen2myradio.com/live.mp3?typeportmount=s1_39026_stream_16338540' },
-                'valley-fm': { frequency: '103 FM', name: 'Valley FM', type: 'iframe', url: 'https://zeno.fm/radio/radio-valley-fm-103/' },
-                'lakki-fm': { frequency: '88 FM', name: 'Lakki FM', type: 'iframe', url: 'https://www.radio-addict.com/en/stream-6UHdXnzjMHcXD9HSMZoES8/listen-Radio-Lakki-Marwat-FM-88' },
-                'dabang-fm': { frequency: '90.4 FM', name: 'Dabang FM', type: 'iframe', url: 'https://zeno.fm/radio/dabang-radio-fm-90-4-attock/' },
-                'umeed-fm': { frequency: '97 FM', name: 'Umeed FM', type: 'iframe', url: 'https://umeedradio.com/listen-live' },
-                'pegham-fm': { frequency: '97.4 FM', name: 'Pegham FM', type: 'audio', url: 'https://uk22freenew.listen2myradio.com/live.mp3?typeportmount=s1_13467_stream_56714146' }
+                'pegham-fm': { frequency: '97.4 FM', name: 'Pegham FM', type: 'audio', url: 'https://uk22freenew.listen2myradio.com/live.mp3?typeportmount=s1_13467_stream_56714146' },
+                'aira-radio': { frequency: 'Live', name: 'Aira Radio', type: 'audio', url: 'https://cc.vmakerhost.com/proxy/airaradio?mp=/airaradio' }
             };
 
             const RBS_SCHEDULE = [
-                { id: 1, timeLabel: '9 to 10 AM', startHour: 9, startMinute: 0, endHour: 10, endMinute: 0, stations: ['suno-fm', 'global-fm', 'zalmy-fm', 'watan-fm', 'hangu-fm', 'valley-fm'], defaultStation: 'hangu-fm' },
-                { id: 2, timeLabel: '3 to 4 PM', startHour: 15, startMinute: 0, endHour: 16, endMinute: 0, stations: ['lakki-fm', 'dabang-fm', 'umeed-fm', 'pegham-fm', 'global-fm'], defaultStation: 'pegham-fm' },
-                { id: 3, timeLabel: '10 to 11 PM', startHour: 22, startMinute: 0, endHour: 23, endMinute: 0, stations: ['lakki-fm', 'global-fm', 'zalmy-fm'], defaultStation: 'lakki-fm' }
+                { id: 1, timeLabel: '9 to 10 AM', startHour: 9, startMinute: 0, endHour: 10, endMinute: 0, stations: ['hangu-fm', 'pegham-fm', 'aira-radio'], defaultStation: 'hangu-fm' },
+                { id: 2, timeLabel: '3 to 4 PM', startHour: 15, startMinute: 0, endHour: 16, endMinute: 0, stations: ['aira-radio', 'pegham-fm', 'hangu-fm'], defaultStation: 'aira-radio' },
+                { id: 3, timeLabel: '10 to 11 PM', startHour: 22, startMinute: 0, endHour: 23, endMinute: 0, stations: ['aira-radio', 'hangu-fm', 'pegham-fm'], defaultStation: 'aira-radio' }
             ];
 
             let rbsCurrentStation = null;
@@ -1326,11 +1360,32 @@
             let rbsLastActiveSlotId = null;
             let rbsUserSelectedInSlot = false;
 
+            function rbsGetTzParts() {
+                const parts = new Intl.DateTimeFormat('en-US', {
+                    timeZone: RBS_TIME_ZONE,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                }).formatToParts(new Date());
+
+                const map = {};
+                for (const p of parts) {
+                    if (p.type !== 'literal') map[p.type] = p.value;
+                }
+
+                return {
+                    hour: Number(map.hour || 0),
+                    minute: Number(map.minute || 0),
+                    second: Number(map.second || 0)
+                };
+            }
+
             function $(id) { return document.getElementById(id); }
 
             function rbsIsSlotActive(slot) {
-                const now = new Date();
-                const currentTime = now.getHours() * 60 + now.getMinutes();
+                const nowTz = rbsGetTzParts();
+                const currentTime = nowTz.hour * 60 + nowTz.minute;
                 const startTime = slot.startHour * 60 + slot.startMinute;
                 const endTime = slot.endHour * 60 + slot.endMinute;
                 return currentTime >= startTime && currentTime < endTime;
@@ -1340,18 +1395,18 @@
                 return RBS_SCHEDULE.find(s => rbsIsSlotActive(s));
             }
 
-            function rbsFormatNow(date) {
-                const h = date.getHours();
-                const m = String(date.getMinutes()).padStart(2, '0');
+            function rbsFormatNow() {
+                const nowTz = rbsGetTzParts();
+                const h = nowTz.hour;
+                const m = String(nowTz.minute).padStart(2, '0');
                 const ampm = h >= 12 ? 'PM' : 'AM';
                 const h12 = ((h + 11) % 12 + 1);
                 return `${h12}:${m} ${ampm}`;
             }
 
             function rbsUpdateNowInfo() {
-                const now = new Date();
                 const active = rbsGetActiveSlot();
-                $('rbs-now-time').textContent = rbsFormatNow(now);
+                $('rbs-now-time').textContent = rbsFormatNow();
                 $('rbs-now-slot').textContent = active ? `${active.timeLabel}` : 'No live slot right now';
                 const liveBtn = $('rbs-broadcast-indicator');
                 if (active) {

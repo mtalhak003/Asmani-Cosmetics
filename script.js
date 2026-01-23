@@ -2,6 +2,7 @@
 const WHATSAPP_NUMBER = '923008562371'; // Pakistan WhatsApp number - Update with your actual number
 
 // Product Data - Easy to add or edit products
+// Updated retail prices (Jan 23, 2026)
 const products = [
     {
         id: 1,
@@ -28,14 +29,6 @@ const products = [
         category: 'Cream'
     },
     {
-        id: 4,
-        name: 'Asmani Acne Facewash',
-        price: 'PKR 350',
-        priceValue: 350,
-        image: 'anti acne facewash.jpeg',
-        category: 'Facewash'
-    },
-    {
         id: 5,
         name: 'Asmani Beauty Facewash',
         price: 'PKR 200',
@@ -45,16 +38,24 @@ const products = [
     },
     {
         id: 6,
-        name: 'Asmani Whitening Serum',
-        price: 'PKR 450',
-        priceValue: 450,
-        image: 'urgent whitening serum.jpeg',
-        category: 'Serum'
+        name: 'Asmani Acne Facewash',
+        price: 'PKR 350',
+        priceValue: 350,
+        image: 'anti acne facewash.jpeg',
+        category: 'Facewash'
     }
 ];
 
 // New Arrivals
 const newArrivals = [
+    {
+        id: 24,
+        name: 'Asmani Acne Serum',
+        price: 'PKR 150',
+        priceValue: 150,
+        image: 'urgent whitening serum.jpeg',
+        category: 'Serum'
+    },
     {
         id: 7,
         name: 'Asmani Rice Facewash',
@@ -64,19 +65,19 @@ const newArrivals = [
         category: 'Facewash'
     },
     {
-        id: 8,
-        name: 'Asmani Beauty Soap',
-        price: 'PKR 100',
-        priceValue: 100,
-        image: 'beauty soap.jpeg',
-        category: 'Soap'
-    },
-    {
         id: 9,
         name: 'Asmani Acne Soap',
         price: 'PKR 150',
         priceValue: 150,
         image: 'anti acne soap.jpeg',
+        category: 'Soap'
+    },
+    {
+        id: 8,
+        name: 'Asmani Beauty Soap',
+        price: 'PKR 100',
+        priceValue: 100,
+        image: 'beauty soap.jpeg',
         category: 'Soap'
     },
     {
@@ -105,93 +106,96 @@ const newArrivals = [
     },
     {
         id: 13,
-        name: 'Asmani Rice Shampoo',
-        price: 'PKR 350',
-        priceValue: 350,
-        image: 'rice shampoo.jpeg',
+        name: 'Asmani Baraf Shampoo',
+        price: 'PKR 300',
+        priceValue: 300,
+        image: 'baraf shampoo.jpeg',
         category: 'Shampoo'
     },
     {
         id: 14,
-        name: 'Asmani Piyaz Shampoo',
-        price: 'PKR 320',
-        priceValue: 320,
+        name: 'Asmani Piyaaz Shampoo',
+        price: 'PKR 300',
+        priceValue: 300,
         image: 'piyaz shampoo.jpeg',
         category: 'Shampoo'
     },
     {
         id: 15,
-        name: 'Asmani Baraf Shampoo',
-        price: 'PKR 280',
-        priceValue: 280,
-        image: 'baraf shampoo.jpeg',
-        category: 'Shampoo'
-    },
-    {
-        id: 16,
-        name: 'Asmani Aloe Vera Shampoo',
-        price: 'PKR 330',
-        priceValue: 330,
+        name: 'Asmani Aloevera Shampoo',
+        price: 'PKR 300',
+        priceValue: 300,
         image: 'aloevera shampoo.jpeg',
         category: 'Shampoo'
     },
     {
-        id: 17,
-        name: 'Asmani Herbal Baraf Spray',
-        price: 'PKR 280',
-        priceValue: 280,
-        image: 'herbal baraf spray.jpeg',
-        category: 'Spray'
-    },
-    {
-        id: 18,
-        name: 'Asmani Rice Skin Polish',
-        price: 'PKR 350',
-        priceValue: 350,
-        image: 'rice skin polish.jpeg',
-        category: 'Polish'
-    },
-    {
-        id: 19,
-        name: 'Asmani Hair Removal Cream Rose',
-        price: 'PKR 400',
-        priceValue: 400,
-        image: 'hair removal cream rose.jpeg',
+        id: 16,
+        name: 'Asmani Crack Cream',
+        price: 'PKR 300',
+        priceValue: 300,
+        image: "crack cream'.jpeg",
         category: 'Cream'
     },
     {
-        id: 20,
-        name: 'Asmani Hair Removal Cream Lemon',
-        price: 'PKR 400',
-        priceValue: 400,
+        id: 17,
+        name: 'Asmani Hair Remover Tube Lemon',
+        price: 'PKR 150',
+        priceValue: 150,
         image: 'hair removal cream lemon.jpeg',
         category: 'Cream'
     },
     {
-        id: 21,
-        name: 'Asmani Moisturising Cold Cream',
-        price: 'PKR 320',
-        priceValue: 320,
-        image: 'moisturising cold cream.jpeg',
+        id: 18,
+        name: 'Asmani Hair Remover Tube Rose',
+        price: 'PKR 150',
+        priceValue: 150,
+        image: 'hair removal cream rose.jpeg',
         category: 'Cream'
     },
     {
-        id: 22,
-        name: 'Asmani Herbal Toothpaste',
-        price: 'PKR 120',
-        priceValue: 120,
+        id: 19,
+        name: 'Asmani Sun Block',
+        price: 'PKR 300',
+        priceValue: 300,
+        image: 'sunblock.jpeg',
+        category: 'Cream'
+    },
+    {
+        id: 20,
+        name: 'Asmani Baraf Spray',
+        price: 'PKR 250',
+        priceValue: 250,
+        image: 'herbal baraf spray.jpeg',
+        category: 'Spray'
+    },
+    {
+        id: 21,
+        name: 'Asmani Tooth Paste',
+        price: 'PKR 200',
+        priceValue: 200,
         image: 'herbal toothpaste.jpeg',
         category: 'Toothpaste'
     },
     {
-        id: 23,
-        name: 'Asmani Herbal Tooth Powder',
-        price: 'PKR 100',
-        priceValue: 100,
+        id: 22,
+        name: 'Asmani Tooth Powder',
+        price: 'PKR 300',
+        priceValue: 300,
         image: 'herbal tooth powder.jpeg',
         category: 'Tooth Powder'
+    },
+    {
+        id: 23,
+        name: 'Asmani Bleach',
+        price: 'PKR 60',
+        priceValue: 60,
+        image: 'gold cream bleach.jpeg',
+        category: 'Bleach'
     }
 ];
+
+// Run immediately so pages with inline cart scripts read updated prices.
+migrateCartToCurrentCatalog();
 
 /**
  * Initialize the website when DOM is loaded
@@ -219,6 +223,75 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavbarProductSearch();
     initCheckoutPage();
 });
+
+function migrateCartToCurrentCatalog() {
+    const cart = readCart();
+    if (!cart.length) return;
+
+    const allProducts = getAllProducts();
+    const aliases = {
+        'asmani skin serum': 'asmani acne serum',
+        'asmani whitening serum': 'asmani acne serum',
+        'asmani piyaz shampoo': 'asmani piyaaz shampoo',
+        'asmani aloe vera shampoo': 'asmani aloevera shampoo',
+        'asmani herbal baraf spray': 'asmani baraf spray',
+        'asmani herbal toothpaste': 'asmani tooth paste',
+        'asmani herbal tooth powder': 'asmani tooth powder',
+        'asmani hair removal cream lemon': 'asmani hair remover tube lemon',
+        'asmani hair removal cream rose': 'asmani hair remover tube rose'
+    };
+
+    const discontinued = new Set([
+        'asmani acne cream'
+    ]);
+
+    const toKey = (s) => String(s || '').trim().toLowerCase();
+    const findByName = (name) => {
+        const key = aliases[toKey(name)] || toKey(name);
+        if (discontinued.has(key)) return null;
+        return allProducts.find(p => toKey(p.name) === key) || null;
+    };
+
+    const merged = new Map();
+
+    for (const item of cart) {
+        const product = findByName(item?.name);
+        const quantity = Math.max(1, Math.min(100, Number(item?.quantity) || 1));
+
+        if (product) {
+            const id = product.id;
+            const existing = merged.get(id);
+            if (existing) {
+                existing.quantity = Math.min(100, existing.quantity + quantity);
+            } else {
+                merged.set(id, {
+                    id: product.id,
+                    name: product.name,
+                    price: product.priceValue,
+                    priceDisplay: product.price,
+                    quantity
+                });
+            }
+        } else {
+            // Unknown/outdated item: keep as-is, but still normalize quantity.
+            const fallbackId = item?.id ?? `legacy:${toKey(item?.name)}`;
+            const existing = merged.get(fallbackId);
+            if (existing) {
+                existing.quantity = Math.min(100, existing.quantity + quantity);
+            } else {
+                merged.set(fallbackId, {
+                    id: item?.id,
+                    name: item?.name,
+                    price: Number(item?.price) || 0,
+                    priceDisplay: item?.priceDisplay,
+                    quantity
+                });
+            }
+        }
+    }
+
+    writeCart(Array.from(merged.values()));
+}
 
 function getAllProducts() {
     try {
@@ -652,7 +725,7 @@ function getProductDescription(productName) {
         'Asmani Herbal Oil 100ml': 'Pure herbal oil enriched with natural ingredients. Perfect for daily skincare and hair nourishment. 100ml size for personal use.',
         'Asmani Herbal Oil 200ml': 'Larger 200ml bottle of premium herbal oil. Ideal for regular users and families. Contains natural herbs and botanical extracts.',
         'Asmani Formula Beauty Cream': 'Advanced formula cream that hydrates and nourishes skin. Suitable for all skin types. Gives a smooth and glowing complexion.',
-        'Asmani Acne Cream': 'Specially formulated cream to treat acne and blemishes. Contains anti-bacterial ingredients. Reduces inflammation and redness.',
+        'Asmani Acne Serum': 'Lightweight acne-care serum that absorbs quickly. Helps reduce breakouts and supports clearer-looking skin with regular use.',
         'Asmani Beauty Facewash': 'Gentle daily facewash for all skin types. Removes dirt and impurities. Leaves skin fresh and rejuvenated.',
         'Asmani Acne Facewash': 'Targeted facewash for acne-prone skin. Helps control excess oil and bacteria. Prevents breakouts and promotes clear skin.',
         'Asmani Rice Facewash': 'Rice-enriched facewash with natural exfoliating properties. Removes dead skin cells gently. Brightens and evens skin tone.',
@@ -662,7 +735,7 @@ function getProductDescription(productName) {
         'Asmani Black Shine Shampoo': 'Hair darkening shampoo that adds natural shine. Strengthens hair roots and reduces hair fall.',
         'Asmani Anti Dandruff Shampoo': 'Specially formulated to treat dandruff and scalp issues. Provides relief from itching and flaking. Keeps hair clean.',
         'Asmani Baraf Shampoo': 'Cooling shampoo with menthol extract. Refreshes scalp and provides relief from heat. Great for summer use.',
-        'Asmani Piyaz Shampoo': 'Onion-enriched shampoo for hair growth and strength. Prevents hair loss and promotes thickness.',
+        'Asmani Piyaaz Shampoo': 'Onion-enriched shampoo for hair growth and strength. Prevents hair loss and promotes thickness.',
         'Asmani Aloevera Shampoo': 'Aloe vera infused shampoo for gentle cleansing. Soothes scalp and adds moisture. Reduces frizz and breakage.',
         'Asmani Crack Cream': 'Specially formulated cream for cracked and dry heels. Moisturizing and healing formula. Repairs damaged skin.',
         'Asmani Hair Remover Tube Lemon': 'Hair removal cream with lemon extract. Safe and effective. Removes unwanted hair smoothly.',
@@ -726,26 +799,75 @@ function updateBroadcastStatus() {
 function setupSlidingCards() {
     const slidingSection = document.querySelector('.sliding-section');
     const slidingCards = document.getElementById('slidingCards');
+    const slidingContainer = document.querySelector('.sliding-container');
+    const prevBtn = document.getElementById('slidePrevBtn');
+    const nextBtn = document.getElementById('slideNextBtn');
     
-    if (!slidingSection || !slidingCards) return;
-    
-    let animationTimeout;
-    
-    slidingSection.addEventListener('mouseenter', function() {
-        // Reset animation when hovering
-        slidingCards.style.animation = 'none';
-        slidingCards.style.transform = 'translateX(0)';
-        
-        // Clear any pending animation restart
-        clearTimeout(animationTimeout);
-    });
-    
-    slidingSection.addEventListener('mouseleave', function() {
-        // Restart animation when hover ends
-        animationTimeout = setTimeout(() => {
-            slidingCards.style.animation = 'slide 30s linear infinite';
-        }, 100);
-    });
+    if (!slidingSection || !slidingCards || !slidingContainer) return;
+
+    // Auto-scroll the container instead of using transform animation.
+    let isPaused = false;
+    let resumeTimer;
+
+    const pause = (ms) => {
+        isPaused = true;
+        clearTimeout(resumeTimer);
+        if (typeof ms === 'number' && ms > 0) {
+            resumeTimer = setTimeout(() => { isPaused = false; }, ms);
+        }
+    };
+
+    const getStep = () => {
+        // Scroll by one card width + gap
+        const firstCard = slidingCards.querySelector('.slide-card');
+        if (!firstCard) return 320;
+        const style = window.getComputedStyle(slidingCards);
+        const gap = Number.parseFloat(style.columnGap || style.gap || '0') || 0;
+        return Math.round(firstCard.getBoundingClientRect().width + gap);
+    };
+
+    const scrollByCards = (dir) => {
+        const step = getStep();
+        slidingContainer.scrollBy({ left: dir * step, behavior: 'smooth' });
+        pause(5000);
+    };
+
+    if (prevBtn && !prevBtn.dataset.bound) {
+        prevBtn.dataset.bound = '1';
+        prevBtn.addEventListener('click', () => scrollByCards(-1));
+    }
+    if (nextBtn && !nextBtn.dataset.bound) {
+        nextBtn.dataset.bound = '1';
+        nextBtn.addEventListener('click', () => scrollByCards(1));
+    }
+
+    slidingSection.addEventListener('mouseenter', () => pause(0));
+    slidingSection.addEventListener('mouseleave', () => { isPaused = false; });
+    slidingSection.addEventListener('touchstart', () => pause(5000), { passive: true });
+    slidingContainer.addEventListener('wheel', () => pause(5000), { passive: true });
+
+    let lastTs = null;
+    const speedPxPerSec = 40; // smooth, gentle auto-scroll
+
+    const tick = (ts) => {
+        if (lastTs == null) lastTs = ts;
+        const dt = (ts - lastTs) / 1000;
+        lastTs = ts;
+
+        if (!isPaused) {
+            slidingContainer.scrollLeft += speedPxPerSec * dt;
+
+            const maxScroll = slidingCards.scrollWidth - slidingContainer.clientWidth;
+            if (maxScroll > 0 && slidingContainer.scrollLeft >= maxScroll - 2) {
+                // Loop back to start
+                slidingContainer.scrollLeft = 0;
+            }
+        }
+
+        requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
 }
 
 /**

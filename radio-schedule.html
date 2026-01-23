@@ -498,6 +498,11 @@
                 font-size: 2rem;
             }
 
+            .station-picker {
+                min-width: 0;
+                width: 100%;
+            }
+
             .player-section {
                 padding: 20px;
             }
@@ -547,6 +552,17 @@
 
             .player-controls {
                 padding: 12px;
+                justify-content: center;
+            }
+
+            .volume {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .volume input[type="range"] {
+                width: 100%;
+                max-width: 260px;
             }
         }
     </style>
@@ -624,66 +640,23 @@
     <script>
         // ============= STATION & SCHEDULE DATA =============
         const STATIONS = {
-            'suno-fm': {
-                frequency: '96 FM',
-                name: 'Suno FM',
-                type: 'iframe',
-                url: 'https://onlineradiobox.com/pk/sunourdu/'
-            },
-            'global-fm': {
-                frequency: '91 FM',
-                name: 'Global FM',
-                type: 'iframe',
-                url: 'https://mytuner-radio.com/radio/global-fm-91-492432/'
-            },
-            'zalmy-fm': {
-                frequency: '90 FM',
-                name: 'Zalmy FM',
-                type: 'unavailable',
-                facebook: 'https://www.facebook.com/zalmayfm90/',
-                youtube: 'https://www.youtube.com/c/zalmayfm90official'
-            },
-            'watan-fm': {
-                frequency: '90.4 FM',
-                name: 'Watan FM',
-                type: 'iframe',
-                url: 'https://zeno.fm/radio/watan-fm/'
-            },
             'hangu-fm': {
                 frequency: '99 FM',
                 name: 'Hangu FM',
                 type: 'audio',
                 url: 'https://uk25freenew.listen2myradio.com/live.mp3?typeportmount=s1_39026_stream_16338540'
             },
-            'valley-fm': {
-                frequency: '103 FM',
-                name: 'Valley FM',
-                type: 'iframe',
-                url: 'https://zeno.fm/radio/radio-valley-fm-103/'
-            },
-            'lakki-fm': {
-                frequency: '88 FM',
-                name: 'Lakki FM',
-                type: 'iframe',
-                url: 'https://www.radio-addict.com/en/stream-6UHdXnzjMHcXD9HSMZoES8/listen-Radio-Lakki-Marwat-FM-88'
-            },
-            'dabang-fm': {
-                frequency: '90.4 FM',
-                name: 'Dabang FM',
-                type: 'iframe',
-                url: 'https://zeno.fm/radio/dabang-radio-fm-90-4-attock/'
-            },
-            'umeed-fm': {
-                frequency: '97 FM',
-                name: 'Umeed FM',
-                type: 'iframe',
-                url: 'https://umeedradio.com/listen-live'
-            },
             'pegham-fm': {
                 frequency: '97.4 FM',
                 name: 'Pegham FM',
                 type: 'audio',
                 url: 'https://uk22freenew.listen2myradio.com/live.mp3?typeportmount=s1_13467_stream_56714146'
+            },
+            'aira-radio': {
+                frequency: 'Live',
+                name: 'Aira Radio',
+                type: 'audio',
+                url: 'https://cc.vmakerhost.com/proxy/airaradio?mp=/airaradio'
             }
         };
 
@@ -695,7 +668,7 @@
                 startMinute: 0,
                 endHour: 10,
                 endMinute: 0,
-                stations: ['suno-fm', 'global-fm', 'zalmy-fm', 'watan-fm', 'hangu-fm', 'valley-fm'],
+                stations: ['hangu-fm', 'pegham-fm', 'aira-radio'],
                 defaultStation: 'hangu-fm'
             },
             {
@@ -705,8 +678,8 @@
                 startMinute: 0,
                 endHour: 16,
                 endMinute: 0,
-                stations: ['lakki-fm', 'dabang-fm', 'umeed-fm', 'pegham-fm', 'global-fm'],
-                defaultStation: 'pegham-fm'
+                stations: ['aira-radio', 'pegham-fm', 'hangu-fm'],
+                defaultStation: 'aira-radio'
             },
             {
                 id: 3,
@@ -715,8 +688,8 @@
                 startMinute: 0,
                 endHour: 23,
                 endMinute: 0,
-                stations: ['lakki-fm', 'global-fm', 'zalmy-fm'],
-                defaultStation: 'lakki-fm'
+                stations: ['aira-radio', 'hangu-fm', 'pegham-fm'],
+                defaultStation: 'aira-radio'
             }
         ];
 
@@ -728,6 +701,29 @@
         let audioElement = null;
         let currentStationType = null;
         let currentStationUrl = null;
+
+        const TIME_ZONE = 'Asia/Karachi';
+
+        function getTzParts() {
+            const parts = new Intl.DateTimeFormat('en-US', {
+                timeZone: TIME_ZONE,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).formatToParts(new Date());
+
+            const map = {};
+            for (const p of parts) {
+                if (p.type !== 'literal') map[p.type] = p.value;
+            }
+
+            return {
+                hour: Number(map.hour || 0),
+                minute: Number(map.minute || 0),
+                second: Number(map.second || 0)
+            };
+        }
 
         // ============= RENDER FUNCTIONS =============
         function renderSchedule() {
@@ -794,10 +790,8 @@
         }
 
         function isTimeSlotActive(slot) {
-            const now = new Date();
-            const currentHour = now.getHours();
-            const currentMinute = now.getMinutes();
-            const currentTime = currentHour * 60 + currentMinute;
+            const nowTz = getTzParts();
+            const currentTime = nowTz.hour * 60 + nowTz.minute;
             
             const startTime = slot.startHour * 60 + slot.startMinute;
             const endTime = slot.endHour * 60 + slot.endMinute;
@@ -809,21 +803,21 @@
             return SCHEDULE.find(slot => isTimeSlotActive(slot));
         }
 
-        function formatNowTime(date) {
-            const h = date.getHours();
-            const m = date.getMinutes().toString().padStart(2, '0');
+        function formatNowTime() {
+            const nowTz = getTzParts();
+            const h = nowTz.hour;
+            const m = String(nowTz.minute).padStart(2, '0');
             const ampm = h >= 12 ? 'PM' : 'AM';
             const h12 = ((h + 11) % 12 + 1);
             return `${h12}:${m} ${ampm}`;
         }
 
         function updateNowInfo() {
-            const now = new Date();
             const nowTimeEl = document.getElementById('now-time');
             const nowSlotEl = document.getElementById('now-slot');
             const activeSlot = getActiveSlot();
 
-            nowTimeEl.textContent = formatNowTime(now);
+            nowTimeEl.textContent = formatNowTime();
             if (activeSlot) {
                 nowSlotEl.textContent = `${activeSlot.timeLabel} (LIVE)`;
             } else {

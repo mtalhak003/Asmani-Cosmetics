@@ -39,6 +39,27 @@ body {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+iframe {
+    max-width: 100%;
+}
+
+input,
+select,
+textarea,
+button {
+    max-width: 100%;
 }
 
 .container {
@@ -799,6 +820,11 @@ body {
 
     .radio-player-audio {
         height: 40px;
+    }
+
+    .timings-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }
 
@@ -1682,23 +1708,62 @@ body {
 
 .sliding-container {
     max-width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge legacy */
 }
+
+.sliding-wrapper {
+    position: relative;
+}
+
+.sliding-container::-webkit-scrollbar {
+    display: none;
+}
+
+.sliding-controls {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.sliding-nav-btn {
+    pointer-events: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.9);
+    color: #222;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.sliding-nav-btn:hover {
+    transform: translateY(-50%) scale(1.04);
+    filter: brightness(1.02);
+}
+
+.sliding-nav-btn:active {
+    transform: translateY(-50%) scale(0.98);
+}
+
+.sliding-nav-btn.prev { left: 12px; }
+.sliding-nav-btn.next { right: 12px; }
 
 .sliding-cards {
     display: flex;
     gap: 2rem;
-    animation: slide 30s linear infinite;
     padding: 2rem;
-}
-
-@keyframes slide {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
 }
 
 .slide-card {
@@ -1793,25 +1858,52 @@ body {
     transform: scale(0.98);
 }
 
-/* Reset animation on hover */
-.sliding-section:hover .sliding-cards {
-    animation: none;
-    transform: translateX(0);
-}
-
-/* Resume animation when hover ends */
-.sliding-section .sliding-cards {
-    transition: transform 0.5s ease;
+@media (max-width: 768px) {
+    .sliding-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+    .sliding-nav-btn.prev { left: 8px; }
+    .sliding-nav-btn.next { right: 8px; }
 }
 
 @media (max-width: 768px) {
+    .nav-container {
+        padding: 0 14px;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .nav-right {
+        flex: 1;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .logo-a {
+        width: 46px;
+        height: 46px;
+        font-size: 2.3rem;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
     .nav-search {
+        order: 3;
+        width: 100%;
+        max-width: 420px;
+        margin-left: auto;
         padding: 5px 6px;
         gap: 6px;
     }
 
     .nav-search-input {
-        width: 150px;
+        width: 100%;
+        min-width: 0;
         padding: 6px 8px;
         font-size: 0.9rem;
     }
@@ -1916,6 +2008,43 @@ body {
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 0 14px;
+    }
+
+    .nav-container {
+        padding: 0 12px;
+    }
+
+    .logo {
+        gap: 0.75rem;
+    }
+
+    .logo-a {
+        width: 42px;
+        height: 42px;
+        font-size: 2.05rem;
+        letter-spacing: 1px;
+    }
+
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .nav-search {
+        max-width: 100%;
+    }
+
+    .hero {
+        height: auto;
+        min-height: 70vh;
+        padding: 1.5rem;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
     .hero-title {
         font-size: 2rem;
     }
@@ -1943,6 +2072,28 @@ body {
     .cta-button {
         padding: 0.8rem 2rem;
         font-size: 1rem;
+    }
+
+    .sliding-cards {
+        padding: 1rem;
+        gap: 1.25rem;
+    }
+
+    .slide-card {
+        flex: 0 0 220px;
+    }
+
+    .checkout-add-row {
+        align-items: stretch;
+    }
+
+    .checkout-select {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .checkout-qty {
+        width: 110px;
     }
 
     .category-title {
@@ -2066,7 +2217,9 @@ a, button {
     display: flex;
     flex-direction: column;
     max-height: calc(100vh - 120px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 140ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    will-change: transform;
+    contain: layout paint;
 }
 
 .cart-header {
@@ -2097,6 +2250,7 @@ a, button {
     border-radius: 6px;
     transition: all 0.3s ease;
     display: none;
+    touch-action: manipulation;
 }
 
 .cart-close:hover {
@@ -2348,6 +2502,7 @@ a, button {
     box-shadow: 0 10px 30px rgba(2, 136, 209, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 500;
+    touch-action: manipulation;
 }
 
 .cart-toggle-btn:hover {
@@ -2420,16 +2575,21 @@ a, button {
     .cart-sidebar {
         position: fixed;
         top: 0;
-        right: -100%;
+        right: 0;
         width: 100%;
         max-width: 400px;
         max-height: 100vh;
         z-index: 999;
         border-radius: 0;
+        transform: translate3d(110%, 0, 0);
+        pointer-events: none;
+        transition: transform 120ms cubic-bezier(0.2, 0.9, 0.2, 1);
+        backface-visibility: hidden;
     }
 
     .cart-sidebar.active {
-        right: 0;
+        transform: translate3d(0, 0, 0);
+        pointer-events: auto;
     }
 
     .cart-close {
@@ -2451,17 +2611,17 @@ a, button {
     }
 
     .cart-sidebar {
-        display: none;
-    }
-
-    .cart-sidebar.active {
-        display: flex;
-        width: 100%;
         max-width: 100%;
     }
 
     .product-card {
         padding-bottom: 1rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cart-sidebar {
+        transition: none !important;
     }
 }
 
