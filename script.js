@@ -77,8 +77,8 @@ const newArrivals = [
     {
         id: 9,
         name: 'Asmani Acne Soap',
-        price: 'PKR 120',
-        priceValue: 120,
+        price: 'PKR 150',
+        priceValue: 150,
         image: 'anti acne soap.jpeg',
         category: 'Soap'
     },
@@ -93,8 +93,8 @@ const newArrivals = [
     {
         id: 10,
         name: 'Asmani Neem Soap',
-        price: 'PKR 120',
-        priceValue: 120,
+        price: 'PKR 150',
+        priceValue: 150,
         image: 'neem soap.jpeg',
         category: 'Soap'
     },
