@@ -23,24 +23,24 @@ const products = [
     {
         id: 3,
         name: 'Asmani Formula Beauty Cream',
-        price: 'PKR 400',
-        priceValue: 400,
+        price: 'PKR 350',
+        priceValue: 350,
         image: 'formula beauty cream.jpeg',
         category: 'Cream'
     },
     {
         id: 5,
         name: 'Asmani Beauty Facewash',
-        price: 'PKR 400',
-        priceValue: 400,
+        price: 'PKR 250',
+        priceValue: 250,
         image: 'face wash.jpeg',
         category: 'Facewash'
     },
     {
         id: 6,
         name: 'Asmani Acne Facewash',
-        price: 'PKR 400',
-        priceValue: 400,
+        price: 'PKR 250',
+        priceValue: 250,
         image: 'anti acne facewash.jpeg',
         category: 'Facewash'
     }
@@ -69,8 +69,8 @@ const newArrivals = [
     {
         id: 7,
         name: 'Asmani Rice Facewash',
-        price: 'PKR 400',
-        priceValue: 400,
+        price: 'PKR 250',
+        priceValue: 250,
         image: 'rice facewash.jpeg',
         category: 'Facewash'
     },
