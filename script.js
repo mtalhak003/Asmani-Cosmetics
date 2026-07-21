@@ -31,16 +31,16 @@ const products = [
     {
         id: 5,
         name: 'Asmani Beauty Facewash',
-        price: 'PKR 250',
-        priceValue: 250,
+        price: 'PKR 200',
+        priceValue: 200,
         image: 'face wash.jpeg',
         category: 'Facewash'
     },
     {
         id: 6,
         name: 'Asmani Acne Facewash',
-        price: 'PKR 250',
-        priceValue: 250,
+        price: 'PKR 300',
+        priceValue: 300,
         image: 'anti acne facewash.jpeg',
         category: 'Facewash'
     }
@@ -69,8 +69,8 @@ const newArrivals = [
     {
         id: 7,
         name: 'Asmani Rice Facewash',
-        price: 'PKR 250',
-        priceValue: 250,
+        price: 'PKR 400',
+        priceValue: 400,
         image: 'rice facewash.jpeg',
         category: 'Facewash'
     },
@@ -93,8 +93,8 @@ const newArrivals = [
     {
         id: 10,
         name: 'Asmani Neem Soap',
-        price: 'PKR 150',
-        priceValue: 150,
+        price: 'PKR 200',
+        priceValue: 200,
         image: 'neem soap.jpeg',
         category: 'Soap'
     },
@@ -155,7 +155,6 @@ const newArrivals = [
         category: 'Cream'
     },
     {
-    {
         id: 32,
         name: 'Asmani Moisturising Cold Cream',
         price: 'PKR 200',
@@ -163,6 +162,7 @@ const newArrivals = [
         image: 'moisturising cold cream.jpeg',
         category: 'Cream'
     },
+    {
         id: 17,
         name: 'Asmani Hair Remover Tube Lemon',
         price: 'PKR 200',
