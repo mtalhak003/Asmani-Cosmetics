@@ -2,7 +2,7 @@
    Asmani Cosmetics — Minimal Modern UI
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Pinyon+Script&display=swap');
 
 *,
 *::before,
@@ -136,7 +136,7 @@ textarea:focus-visible {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(245, 249, 252, 0.9);
+    background: rgba(226, 239, 248, 0.94);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -146,7 +146,7 @@ textarea:focus-visible {
 }
 
 .navbar.is-scrolled {
-    background: rgba(255, 255, 255, 0.96);
+    background: rgba(226, 239, 248, 0.98);
     box-shadow: var(--shadow-sm);
 }
 
@@ -169,7 +169,15 @@ textarea:focus-visible {
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    width: clamp(160px, 18vw, 205px);
+    aspect-ratio: 685 / 292;
+}
+
+.brand-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .logo-a {
@@ -389,11 +397,15 @@ textarea:focus-visible {
 }
 
 .hero-title {
+    display: inline-block;
+    font-family: var(--font);
     font-size: clamp(2.25rem, 6vw, 3.5rem);
     font-weight: 700;
     letter-spacing: -0.04em;
     line-height: 1.1;
     margin-bottom: 0.75rem;
+    padding-bottom: 0.14em;
+    border-bottom: 2px solid var(--blue-500);
     background: linear-gradient(135deg, var(--blue-700) 0%, var(--blue-500) 55%, var(--blue-400) 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -401,8 +413,24 @@ textarea:focus-visible {
     -webkit-text-fill-color: transparent;
 }
 
+.hero-brand-name {
+    font-family: 'ITC Bookman', 'Bookman Swash', 'Bookman Old Style', Georgia, 'Times New Roman', serif;
+    font-feature-settings: 'swsh' 1;
+    font-variant-alternates: swash;
+}
+
+.hero-brand-name::first-letter {
+    font-size: 1.3em;
+    line-height: 1;
+}
+
+.hero-brand-category {
+    font-size: 0.7em;
+    letter-spacing: 0.04em;
+}
+
 .hero-tagline {
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    font-size: 1.25rem;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -411,11 +439,17 @@ textarea:focus-visible {
 }
 
 .hero-subtitle {
-    font-size: clamp(0.95rem, 2vw, 1.05rem);
-    color: var(--text-secondary);
+    font-family: 'Pinyon Script', cursive;
+    font-size: 1.25rem;
+    font-weight: 400;
+    background: linear-gradient(90deg, #a66d0d 0%, #f0bd3f 48%, #a66d0d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
     margin: 0 auto 1.75rem;
     max-width: 420px;
-    line-height: 1.65;
+    line-height: 1.25;
 }
 
 .cta-button {
@@ -2736,14 +2770,8 @@ textarea:focus-visible {
         min-width: 0;
     }
 
-    .logo h1 {
-        font-size: 0.95rem;
-    }
-
-    .logo-a {
-        width: 32px;
-        height: 32px;
-        font-size: 1.45rem;
+    .logo {
+        width: 150px;
     }
 }
 
