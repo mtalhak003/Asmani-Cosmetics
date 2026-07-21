@@ -253,7 +253,7 @@ const newArrivals = [
 ];
 
 // Products featured in the home-page Top selling section, in display order.
-const topSellingProductIds = [1, 3, 5, 27, 7, 29, 23, 16, 22, 20, 13];
+const topSellingProductIds = [1, 3, 5, 27, 7, 29, 23, 16, 26, 22, 20, 13];
 
 // Run immediately so pages with inline cart scripts read updated prices.
 migrateCartToCurrentCatalog();
