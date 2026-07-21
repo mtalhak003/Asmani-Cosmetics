@@ -243,20 +243,20 @@ const newArrivals = [
         category: 'Shampoo'
     },
     {
-        id: 30,
-        name: 'Asmani Rice Skin Polish',
-        price: 'Coming Soon',
-        priceValue: 'Coming Soon',
-        image: 'rice skin polish.jpeg',
-        category: 'Cream'
-    },
-    {
         id: 31,
         name: 'Asmani Pomegranate Cream Bleach',
         price: 'PKR 60',
         priceValue: 60,
         image: 'pomegrenate cream bleach.jpeg',
         category: 'Bleach'
+    },
+    {
+        id: 30,
+        name: 'Asmani Rice Skin Polish',
+        price: 'Coming Soon',
+        priceValue: 'Coming Soon',
+        image: 'rice skin polish.jpeg',
+        category: 'Cream'
     }
 ];
 
