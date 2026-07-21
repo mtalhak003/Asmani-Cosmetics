@@ -67,14 +67,6 @@ const newArrivals = [
         category: 'Serum'
     },
     {
-        id: 25,
-        name: 'Asmani Beauty Cream',
-        price: 'PKR 400',
-        priceValue: 400,
-        image: 'beauty cream.jpeg',
-        category: 'Cream'
-    },
-    {
         id: 7,
         name: 'Asmani Rice Facewash',
         price: 'PKR 400',
@@ -259,6 +251,9 @@ const newArrivals = [
         category: 'Cream'
     }
 ];
+
+// Products featured in the home-page Top selling section, in display order.
+const topSellingProductIds = [1, 3, 5, 27, 7, 29, 23, 16, 22, 20, 13];
 
 // Run immediately so pages with inline cart scripts read updated prices.
 migrateCartToCurrentCatalog();
@@ -757,7 +752,12 @@ function renderProducts() {
     if (!productsGrid) return;
     productsGrid.innerHTML = '';
 
-    products.forEach(product => {
+    const productsById = new Map(getAllProducts().map(product => [product.id, product]));
+    const topSellingProducts = topSellingProductIds
+        .map(id => productsById.get(id))
+        .filter(Boolean);
+
+    topSellingProducts.forEach(product => {
         const productCard = createProductCard(product);
         productsGrid.appendChild(productCard);
     });
