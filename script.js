@@ -148,7 +148,7 @@ const newArrivals = [
     },
     {
         id: 26,
-        name: 'Asmani Moisturising Cold Cream Aloe Vera',
+        name: 'Asmani Moisturizing Cold Cream Aloe Vera',
         price: 'PKR 200',
         priceValue: 200,
         image: 'moisturising cold cream aloe vera.jpeg',
