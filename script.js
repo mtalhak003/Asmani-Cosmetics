@@ -155,6 +155,14 @@ const newArrivals = [
         category: 'Cream'
     },
     {
+    {
+        id: 32,
+        name: 'Asmani Moisturising Cold Cream',
+        price: 'PKR 200',
+        priceValue: 200,
+        image: 'moisturising cold cream.jpeg',
+        category: 'Cream'
+    },
         id: 17,
         name: 'Asmani Hair Remover Tube Lemon',
         price: 'PKR 200',
