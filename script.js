@@ -752,12 +752,9 @@ function renderProducts() {
     if (!productsGrid) return;
     productsGrid.innerHTML = '';
 
-    const productsById = new Map(getAllProducts().map(product => [product.id, product]));
-    const topSellingProducts = topSellingProductIds
-        .map(id => productsById.get(id))
-        .filter(Boolean);
+    const catalogProducts = [...products, ...newArrivals];
 
-    topSellingProducts.forEach(product => {
+    catalogProducts.forEach(product => {
         const productCard = createProductCard(product);
         productsGrid.appendChild(productCard);
     });
