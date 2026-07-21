@@ -752,7 +752,7 @@ function renderProducts() {
     if (!productsGrid) return;
     productsGrid.innerHTML = '';
 
-    const catalogProducts = [...products, ...newArrivals];
+    const catalogProducts = getAllProducts();
 
     catalogProducts.forEach(product => {
         const productCard = createProductCard(product);

@@ -185,7 +185,7 @@
                 return;
             }
             
-            const allProducts = [...products, ...newArrivals];
+            const allProducts = getAllProducts();
             
             if (allProducts.length === 0) {
                 grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No products found</p>';
@@ -248,7 +248,7 @@
                     return;
                 }
 
-                const allProducts = [...products, ...newArrivals];
+                const allProducts = getAllProducts();
                 const product = allProducts.find(p => p.id === productId);
                 const input = document.getElementById(`qty-${productId}`);
                 const qty = parseInt(input.value) || 1;
