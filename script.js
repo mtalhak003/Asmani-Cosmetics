@@ -1,5 +1,5 @@
 // WhatsApp Configuration
-const WHATSAPP_NUMBER = '923008562371'; // Pakistan WhatsApp number - Update with your actual number
+const WHATSAPP_NUMBER = '923005858481'; // Pakistan WhatsApp number
 
 // Product Data - Easy to add or edit products
 // Updated retail prices (Jan 23, 2026)
@@ -23,27 +23,37 @@ const products = [
     {
         id: 3,
         name: 'Asmani Formula Beauty Cream',
-        price: 'PKR 350',
-        priceValue: 350,
+        price: 'PKR 400',
+        priceValue: 400,
         image: 'formula beauty cream.jpeg',
         category: 'Cream'
     },
     {
         id: 5,
         name: 'Asmani Beauty Facewash',
-        price: 'PKR 200',
-        priceValue: 200,
+        price: 'PKR 400',
+        priceValue: 400,
         image: 'face wash.jpeg',
         category: 'Facewash'
     },
     {
         id: 6,
         name: 'Asmani Acne Facewash',
-        price: 'PKR 350',
-        priceValue: 350,
+        price: 'PKR 400',
+        priceValue: 400,
         image: 'anti acne facewash.jpeg',
         category: 'Facewash'
     }
+];
+
+// Special deals shown in the homepage carousel (Buy Now / cart support)
+const dealProducts = [
+    { id: 101, name: 'Deal 1', price: 'PKR 1400', priceValue: 1400, image: 'deal 1.jpeg', category: 'Deal' },
+    { id: 102, name: 'Deal 2', price: 'PKR 1500', priceValue: 1500, image: 'deal 2.jpeg', category: 'Deal' },
+    { id: 103, name: 'Deal 3', price: 'PKR 1500', priceValue: 1500, image: 'deal 3.jpeg', category: 'Deal' },
+    { id: 104, name: 'Deal 4', price: 'PKR 1500', priceValue: 1500, image: 'deal 4.jpeg', category: 'Deal' },
+    { id: 105, name: 'Deal 5', price: 'PKR 1600', priceValue: 1600, image: 'deal 5.jpeg', category: 'Deal' },
+    { id: 106, name: 'Deal 6', price: 'PKR 1500', priceValue: 1500, image: 'deal 6.jpeg', category: 'Deal' }
 ];
 
 // New Arrivals
@@ -53,79 +63,87 @@ const newArrivals = [
         name: 'Asmani Acne Serum',
         price: 'PKR 150',
         priceValue: 150,
-        image: 'urgent whitening serum.jpeg',
+        image: 'urgent whitening cream.jpeg',
         category: 'Serum'
+    },
+    {
+        id: 25,
+        name: 'Asmani Beauty Cream',
+        price: 'PKR 400',
+        priceValue: 400,
+        image: 'beauty cream.jpeg',
+        category: 'Cream'
     },
     {
         id: 7,
         name: 'Asmani Rice Facewash',
-        price: 'PKR 350',
-        priceValue: 350,
+        price: 'PKR 400',
+        priceValue: 400,
         image: 'rice facewash.jpeg',
         category: 'Facewash'
     },
     {
         id: 9,
         name: 'Asmani Acne Soap',
-        price: 'PKR 150',
-        priceValue: 150,
+        price: 'PKR 120',
+        priceValue: 120,
         image: 'anti acne soap.jpeg',
         category: 'Soap'
     },
     {
         id: 8,
         name: 'Asmani Beauty Soap',
-        price: 'PKR 100',
-        priceValue: 100,
+        price: 'PKR 120',
+        priceValue: 120,
         image: 'beauty soap.jpeg',
         category: 'Soap'
     },
     {
         id: 10,
         name: 'Asmani Neem Soap',
-        price: 'PKR 200',
-        priceValue: 200,
+        price: 'PKR 120',
+        priceValue: 120,
         image: 'neem soap.jpeg',
         category: 'Soap'
     },
     {
         id: 11,
         name: 'Asmani Black Shine Shampoo',
-        price: 'PKR 300',
-        priceValue: 300,
-        image: 'black shine shampoo.jpeg',
+        price: 'PKR 400',
+        priceValue: 400,
+        image: 'balck shine shampoo.jpeg',
         category: 'Shampoo'
     },
     {
         id: 12,
         name: 'Asmani Anti Dandruff Shampoo',
-        price: 'PKR 300',
-        priceValue: 300,
+        price: 'PKR 400',
+        priceValue: 400,
         image: 'anti dandruff shampoo.jpeg',
         category: 'Shampoo'
     },
     {
         id: 13,
         name: 'Asmani Baraf Shampoo',
-        price: 'PKR 300',
-        priceValue: 300,
+        price: 'PKR 400',
+        priceValue: 400,
         image: 'baraf shampoo.jpeg',
         category: 'Shampoo'
     },
     {
         id: 14,
         name: 'Asmani Piyaaz Shampoo',
-        price: 'PKR 300',
-        priceValue: 300,
+        price: 'PKR 400',
+        priceValue: 400,
         image: 'piyaz shampoo.jpeg',
         category: 'Shampoo'
     },
     {
         id: 15,
         name: 'Asmani Aloevera Shampoo',
-        price: 'PKR 300',
-        priceValue: 300,
-        image: 'aloevera shampoo.jpeg',
+        price: 'PKR 400',
+        priceValue: 400,
+        image: 'aloe vera shampoo.jpeg',
         category: 'Shampoo'
     },
     {
@@ -133,22 +151,30 @@ const newArrivals = [
         name: 'Asmani Crack Cream',
         price: 'PKR 300',
         priceValue: 300,
-        image: "crack cream'.jpeg",
+        image: 'crack cream.jpeg',
+        category: 'Cream'
+    },
+    {
+        id: 26,
+        name: 'Asmani Moisturising Cold Cream Aloe Vera',
+        price: 'PKR 200',
+        priceValue: 200,
+        image: 'moisturising cold cream aloe vera.jpeg',
         category: 'Cream'
     },
     {
         id: 17,
         name: 'Asmani Hair Remover Tube Lemon',
-        price: 'PKR 150',
-        priceValue: 150,
+        price: 'PKR 200',
+        priceValue: 200,
         image: 'hair removal cream lemon.jpeg',
         category: 'Cream'
     },
     {
         id: 18,
         name: 'Asmani Hair Remover Tube Rose',
-        price: 'PKR 150',
-        priceValue: 150,
+        price: 'PKR 200',
+        priceValue: 200,
         image: 'hair removal cream rose.jpeg',
         category: 'Cream'
     },
@@ -191,6 +217,46 @@ const newArrivals = [
         priceValue: 60,
         image: 'gold cream bleach.jpeg',
         category: 'Bleach'
+    },
+    {
+        id: 27,
+        name: 'Asmani Rice Beauty Cream',
+        price: 'PKR 400',
+        priceValue: 400,
+        image: 'rice beauty cream.jpeg',
+        category: 'Cream'
+    },
+    {
+        id: 28,
+        name: 'Asmani Rice Cream Bleach',
+        price: 'PKR 60',
+        priceValue: 60,
+        image: 'rice cream bleach.jpeg',
+        category: 'Bleach'
+    },
+    {
+        id: 29,
+        name: 'Asmani Rice Shampoo',
+        price: 'PKR 400',
+        priceValue: 400,
+        image: 'rice shampoo.jpeg',
+        category: 'Shampoo'
+    },
+    {
+        id: 30,
+        name: 'Asmani Rice Skin Polish',
+        price: 'Coming Soon',
+        priceValue: 'Coming Soon',
+        image: 'rice skin polish.jpeg',
+        category: 'Cream'
+    },
+    {
+        id: 31,
+        name: 'Asmani Pomegranate Cream Bleach',
+        price: 'PKR 60',
+        priceValue: 60,
+        image: 'pomegrenate cream bleach.jpeg',
+        category: 'Bleach'
     }
 ];
 
@@ -212,6 +278,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (document.getElementById('slidingCards')) {
         setupSlidingCards();
+    }
+    if (document.getElementById('imageLightbox')) {
+        setupImageLightbox();
     }
     if (document.querySelector('.current-status')) {
         updateBroadcastStatus();
@@ -238,7 +307,8 @@ function migrateCartToCurrentCatalog() {
         'asmani herbal toothpaste': 'asmani tooth paste',
         'asmani herbal tooth powder': 'asmani tooth powder',
         'asmani hair removal cream lemon': 'asmani hair remover tube lemon',
-        'asmani hair removal cream rose': 'asmani hair remover tube rose'
+        'asmani hair removal cream rose': 'asmani hair remover tube rose',
+        'asmani beauty cream': 'asmani formula beauty cream'
     };
 
     const discontinued = new Set([
@@ -295,7 +365,7 @@ function migrateCartToCurrentCatalog() {
 
 function getAllProducts() {
     try {
-        return [...(products || []), ...(newArrivals || [])];
+        return [...(products || []), ...(newArrivals || []), ...(dealProducts || [])];
     } catch (e) {
         return [];
     }
@@ -620,30 +690,52 @@ function initCheckoutPage() {
         });
     }
 
-    if (waBtn) {
-        waBtn.addEventListener('click', () => {
+    const openWhatsAppOrder = () => {
             const cart = readCart();
             if (!cart.length) return;
 
-            let message = 'Asmani Cosmetics - Bill / Order\n\n';
-            message += `Invoice: ${invoiceNo}\n`;
-            message += `Date: ${dateStr}\n\n`;
-            message += 'Items:\n';
+            const orderDate = invoice?.createdAt
+                ? new Date(invoice.createdAt).toLocaleDateString('en-US', {
+                    month: 'long', day: 'numeric', year: 'numeric'
+                })
+                : new Date().toLocaleDateString('en-US', {
+                    month: 'long', day: 'numeric', year: 'numeric'
+                });
+
+            let message = 'Hello,\n\n';
+            message += 'I would like to place the following order:\n\n';
+            message += `Invoice No.: ${invoiceNo}\n`;
+            message += `Date: ${orderDate}\n\n`;
+            message += 'Order Details:\n';
 
             let total = 0;
             for (const item of cart) {
                 const line = Number(item.price || 0) * Number(item.quantity || 0);
                 total += line;
-                message += `- ${item.name} (x${item.quantity}) = PKR ${line}\n`;
+                message += `- ${item.name} \u00d7 ${item.quantity} \u2014 PKR ${line}\n`;
             }
 
-            message += `\nTotal: PKR ${total}\n`;
-            message += '\nPlease confirm availability and delivery details. Thank you.';
+            message += `\nTotal Amount: PKR ${total}\n\n`;
+            message += 'Kindly confirm the availability of the item and share the expected delivery time, delivery charges (if any), and payment details.\n\n';
+            message += 'Thank you.';
 
             const encoded = encodeURIComponent(message);
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
-        });
+    };
+
+    if (waBtn) {
+        waBtn.addEventListener('click', openWhatsAppOrder);
     }
+
+    // On the checkout page, the floating and footer WhatsApp links should send
+    // the current order instead of their generic chat greeting.
+    document.querySelectorAll('.whatsapp-float, footer .whatsapp-link').forEach((link) => {
+        link.addEventListener('click', (event) => {
+            if (!readCart().length) return;
+            event.preventDefault();
+            openWhatsAppOrder();
+        });
+    });
 
     if (clearBtn) {
         clearBtn.addEventListener('click', () => {
@@ -703,7 +795,7 @@ function createProductCard(product) {
     
     card.innerHTML = `
         <div class="product-image">
-            <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'">
+            <img src="${product.image}" alt="${product.name}" onload="fitProductImage(this)" onerror="this.style.display='none'">
         </div>
         <div class="product-info">
             <h3 class="product-name">${product.name}</h3>
@@ -715,6 +807,15 @@ function createProductCard(product) {
     return card;
 }
 
+function fitProductImage(image) {
+    // Keep the complete product visible at its natural proportion.
+    if (!image) return;
+    image.style.width = '100%';
+    image.style.height = 'auto';
+    image.style.objectFit = 'contain';
+    image.style.objectPosition = 'center';
+}
+
 /**
  * Get product description based on product name
  * @param {string} productName - Name of the product
@@ -724,7 +825,6 @@ function getProductDescription(productName) {
     const descriptions = {
         'Asmani Herbal Oil 100ml': 'Pure herbal oil enriched with natural ingredients. Perfect for daily skincare and hair nourishment. 100ml size for personal use.',
         'Asmani Herbal Oil 200ml': 'Larger 200ml bottle of premium herbal oil. Ideal for regular users and families. Contains natural herbs and botanical extracts.',
-        'Asmani Formula Beauty Cream': 'Advanced formula cream that hydrates and nourishes skin. Suitable for all skin types. Gives a smooth and glowing complexion.',
         'Asmani Acne Serum': 'Lightweight acne-care serum that absorbs quickly. Helps reduce breakouts and supports clearer-looking skin with regular use.',
         'Asmani Beauty Facewash': 'Gentle daily facewash for all skin types. Removes dirt and impurities. Leaves skin fresh and rejuvenated.',
         'Asmani Acne Facewash': 'Targeted facewash for acne-prone skin. Helps control excess oil and bacteria. Prevents breakouts and promotes clear skin.',
@@ -764,6 +864,7 @@ function closeProductModal() {
  * @param {string} productPrice - Price of the product
  */
 function handleBuyNow(productName, productPrice) {
+
     // Add to cart and go to bill page
     addToCartFromBuyNow(productName, 1);
     window.location.href = 'checkout.html';
@@ -791,6 +892,51 @@ function updateBroadcastStatus() {
             broadcastStatus.style.display = 'none';
         }
     }
+}
+
+/**
+ * Lightbox for lottery winner gallery images
+ */
+function setupImageLightbox() {
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const closeBtn = document.getElementById('lightboxClose');
+    const triggers = document.querySelectorAll('[data-lightbox-src]');
+
+    if (!lightbox || !lightboxImage || !triggers.length) return;
+
+    const openLightbox = (src, alt) => {
+        lightboxImage.src = src;
+        lightboxImage.alt = alt || 'Enlarged photo';
+        lightbox.hidden = false;
+        document.body.classList.add('lightbox-open');
+        if (closeBtn) closeBtn.focus();
+    };
+
+    const closeLightbox = () => {
+        lightbox.hidden = true;
+        lightboxImage.src = '';
+        lightboxImage.alt = '';
+        document.body.classList.remove('lightbox-open');
+    };
+
+    triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+            openLightbox(trigger.dataset.lightboxSrc, trigger.dataset.lightboxAlt);
+        });
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeLightbox);
+    }
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+    });
 }
 
 /**
@@ -857,10 +1003,10 @@ function setupSlidingCards() {
         if (!isPaused) {
             slidingContainer.scrollLeft += speedPxPerSec * dt;
 
-            const maxScroll = slidingCards.scrollWidth - slidingContainer.clientWidth;
-            if (maxScroll > 0 && slidingContainer.scrollLeft >= maxScroll - 2) {
-                // Loop back to start
-                slidingContainer.scrollLeft = 0;
+            // Seamless loop using duplicated track (first half === second half)
+            const halfWidth = slidingCards.scrollWidth / 2;
+            if (halfWidth > 0 && slidingContainer.scrollLeft >= halfWidth - 1) {
+                slidingContainer.scrollLeft -= halfWidth;
             }
         }
 
@@ -1025,11 +1171,17 @@ function initBackToTop() {
 
     document.body.appendChild(btn);
 
+    const navbar = document.querySelector('.navbar');
+
     const toggle = () => {
         if (window.scrollY > 400) {
             btn.classList.add('show');
         } else {
             btn.classList.remove('show');
+        }
+
+        if (navbar) {
+            navbar.classList.toggle('is-scrolled', window.scrollY > 20);
         }
     };
 
