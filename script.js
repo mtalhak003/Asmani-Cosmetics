@@ -51,8 +51,8 @@ const dealProducts = [
     { id: 101, name: 'Deal 1', price: 'PKR 1400', priceValue: 1400, image: 'deal 1.jpeg', category: 'Deal' },
     { id: 102, name: 'Deal 2', price: 'PKR 1500', priceValue: 1500, image: 'deal 2.jpeg', category: 'Deal' },
     { id: 103, name: 'Deal 3', price: 'PKR 1500', priceValue: 1500, image: 'deal 3.jpeg', category: 'Deal' },
-    { id: 104, name: 'Deal 4', price: 'PKR 1500', priceValue: 1500, image: 'deal 4.jpeg', category: 'Deal' },
-    { id: 105, name: 'Deal 5', price: 'PKR 1600', priceValue: 1600, image: 'deal 5.jpeg', category: 'Deal' },
+    { id: 104, name: 'Deal 4', price: 'PKR 1600', priceValue: 1600, image: 'deal 4.jpeg', category: 'Deal' },
+    { id: 105, name: 'Deal 5', price: 'PKR 1500', priceValue: 1500, image: 'deal 5.jpeg', category: 'Deal' },
     { id: 106, name: 'Deal 6', price: 'PKR 1500', priceValue: 1500, image: 'deal 6.jpeg', category: 'Deal' }
 ];
 
